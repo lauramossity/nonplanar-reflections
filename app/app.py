@@ -31,21 +31,26 @@ class Canvas(QtGui.QWidget):
         newSize = loadedImage.size().expandedTo(self.size())
         self.resizeImage(loadedImage, newSize)
         self.image = loadedImage
-        #self.modified = Fal
+        #self.modified = False
         self.update()
         return True
 
     def paintEvent(self, event):
         painter = QtGui.QPainter(self)
         painter.drawImage(QtCore.QPoint(0, 0), self.image)
-        self.analysisObject.draw(painter)
+        self.analysisObject.draw(painter, self.contentsRect())
 
     def mousePressEvent(self, event):
         if event.button() == QtCore.Qt.LeftButton and not self.image.isNull():
             #event.pos
             if self._analysisMode == AnalysisMode.SPHERICAL and self._toolMode == ToolMode.CIRCLE:
                 # make circle
-                print "Circle: Not yet iimplemented"
+                # TODO call analysisObject.addCircle() if there are 2 points saved
+                if len(self._points) > 1:
+                    self.analysisObject.addCircle(self._points[-1], self._points[-2], event.pos())
+                    self._points = []
+                else:
+                    self._points.append(event.pos())
             elif self._toolMode == ToolMode.POINT_MATCHING:
                 # make lines
                 if self._points:
@@ -72,6 +77,14 @@ class Canvas(QtGui.QWidget):
 
     def setAnalysisMode(self, newMode):
         self._analysisMode = newMode
+
+        if newMode == AnalysisMode.PLANAR:
+            self.analysisObject = ReflectionAnalysis.PlanarAnalysis()
+        elif newMode == AnalysisMode.SPHERICAL:
+            self.analysisObject = ReflectionAnalysis.SphericalAnalysis()
+        else:
+            print "Error: Undefined analysis mode"
+
         self._points = []
 
     def setToolMode(self, newMode):
@@ -80,6 +93,9 @@ class Canvas(QtGui.QWidget):
 
     def startNewLineGroup(self):
         self.analysisObject.startNewLineCollection()
+
+    def analyze(self):
+        self.analysisObject.analyze()
 
 class MainWindow(QtGui.QMainWindow):
     def __init__(self):
@@ -129,6 +145,8 @@ class MainWindow(QtGui.QMainWindow):
 
         self.newLineGroupAct = QtGui.QAction("New Line Group", self, toolTip="Start a new group of lines. Use this when starting to analyze another object in the scene.", triggered=self.canvas.startNewLineGroup)
 
+        self.analyzeAct = QtGui.QAction("Analyze", self, toolTip="Perform an analysis based on the current information.", triggered=self.canvas.analyze)
+
         # set up initial configuration
         self.setPlanarAct.setChecked(True)
         self.setAnalysisMode(AnalysisMode.PLANAR)
@@ -152,6 +170,10 @@ class MainWindow(QtGui.QMainWindow):
         for action in self.mouseToolActGrp.actions():
             toolBar.addAction(action)
         toolBar.addAction(self.newLineGroupAct)
+
+        toolBar.addSeparator()
+
+        toolBar.addAction(self.analyzeAct)
 
 def main():
     app = QtGui.QApplication(argv)

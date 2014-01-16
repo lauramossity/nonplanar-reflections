@@ -4,11 +4,14 @@ import numpy as np
 import Tkinter, tkFileDialog
 import random
 import itertools
-from math import hypot
+from math import hypot, sqrt
 
 from PySide import QtCore
 from PySide.QtGui import QColor
 
+from abc import ABCMeta, abstractmethod
+
+from scipy.optimize import fsolve
 
 
 
@@ -19,6 +22,32 @@ TODO:
 
 '''
 
+# Find the intersection points between a QLine and a QRect
+def intersectLineRect(line, rect):
+    x1, y1, x2, y2 = rect.getCoords()
+
+    toReturn = []
+
+    rectLines = []
+    rectLines.append(QtCore.QLineF(x1, y1, x2, y1))
+    rectLines.append(QtCore.QLineF(x1, y1, x1, y2))
+    rectLines.append(QtCore.QLineF(x2, y1, x2, y2))
+    rectLines.append(QtCore.QLineF(x1, y2, x2, y2))
+
+    for l in rectLines:
+        intersectType, intersectionPoint = line.intersect(l)
+        if intersectType != QtCore.QLineF.NoIntersection and rect.contains(intersectionPoint.toPoint()):
+            toReturn.append(intersectionPoint)
+
+    return toReturn
+
+def minDistance(point, line):
+    p = np.array(point.toTuple())
+    a = np.array(line.p1().toTuple())
+    unit = line.unitVector()
+    n = np.array([unit.dx(), unit.dy()])
+
+    return np.linalg.norm((a - p) - np.dot((a-p), n) * n)
 
 class LineCollection:
 
@@ -30,11 +59,12 @@ class LineCollection:
         self.lines.append(newLine)
         self.intersections = self._findIntersections()
 
-    def draw(self, painter, color):
+    def draw(self, painter, borderRect, color):
         # TODO: calculate border points for each line, draw a line between those points
         painter.setPen(QColor(color[0], color[1], color[2]))
         for l in self.lines:
-            painter.drawLine(l)
+            borderPoints = intersectLineRect(l, borderRect)
+            painter.drawLine(borderPoints[0], borderPoints[1]) # Unsafe, may not return this many points
             painter.drawEllipse(l.p1(), 2, 2)
             painter.drawEllipse(l.p2(), 2, 2)
 
@@ -60,7 +90,9 @@ class AnalysisResult:
     def __repr__(self):
         return str("Number of clusters: %d, Distance sums: %s, Original indices: %s" % (self.numClusters, self.distanceSums, self.originalIndices))
 
-class PlanarAnalysis:
+class AbstractAnalysis:
+    __metaclass__ = ABCMeta
+
     # collection of collections of lines, one for each object
 
     def __init__(self):
@@ -76,10 +108,10 @@ class PlanarAnalysis:
         self.openCollectionIdx += 1
         self.colors.append((random.randint(0,255),random.randint(0,255),random.randint(0,255)))
 
-    def draw(self, painter):
+    def draw(self, painter, borderRect):
         # draw all lines
         for lc in self.lineCollections:
-            lc.draw(painter, self.colors[self.lineCollections.index(lc)])
+            lc.draw(painter, borderRect, self.colors[self.lineCollections.index(lc)])
 
     def addLine(self, newLine):
         self.lineCollections[self.openCollectionIdx].addLine(newLine)
@@ -88,6 +120,14 @@ class PlanarAnalysis:
         newLine = QtCore.QLineF(point1, point2)
         self.lineCollections[self.openCollectionIdx].addLine(newLine)
 
+    @abstractmethod
+    def analyze(self):
+        pass
+
+
+class PlanarAnalysis(AbstractAnalysis):
+
+    
     # method to return likely clusters and whether or not at least one deviates
     # perform k-means for k = number of objects to 1
     # calculate variance from centroids?
@@ -148,3 +188,65 @@ class PlanarAnalysis:
 
         print minidx
         return minidx
+
+    def analyze(self):
+        raise NotImplementedError
+
+
+class SphericalAnalysis(AbstractAnalysis):
+    def __init__(self):
+        # TODO: add a circle representation
+        super(SphericalAnalysis, self).__init__()
+
+        self.center = QtCore.QPointF(0,0)
+        self.radius = 0
+        self.circlePoints = []
+
+    def draw(self, painter, borderRect):
+        super(SphericalAnalysis, self).draw(painter, borderRect)
+        if self.radius != 0:
+            painter.setPen(QColor(255, 0, 0))
+            painter.drawEllipse(self.center, self.radius, self.radius)
+            for p in self.circlePoints:
+                painter.drawEllipse(p, 2, 2)
+            painter.drawEllipse(self.center,2,2)
+
+    def addCircle(self, point1, point2, point3):
+        '''
+        def equations(p):
+            h, k, r = p
+            return ( (point1.x()-h)**2 + (point1.y()-k)**2 - r**2,
+                (point2.x()-h)**2 + (point3.y()-k)**2 - r**2,
+                (1000 * (point3.x()-h)**2 + (point3.y()-k)**2 - r**2) )
+
+        sumX = point1.x() + point2.x() + point3.x()
+        sumY = point1.y() + point2.y() + point3.y()
+        guessX = sumX/3.0
+        guessY = sumY/3.0
+        guess = (guessX, guessY, hypot((sumX - 3*guessX)/3, (sumY - 3*guessY)))
+
+        h, k, self.radius = fsolve(equations, guess)
+
+        print "Error:", equations((h,k,self.radius))
+
+        self.center.setX(h)
+        self.center.setY(k)
+        self.circlePoints = [point1, point2, point3]
+        '''
+        # ax + by + c = x^2 + y^2
+        A = np.array([[point1.x(),point1.y(),1], [point2.x(),point2.y(),1], [point3.x(),point3.y(),1]])
+        b = np.array([[-(point1.x()**2+point1.y()**2)], [-(point2.x()**2+point2.y()**2)], [-(point3.x()**2+point3.y()**2)]])
+        solution = np.linalg.solve(A,b)
+
+        h = solution[0,0] / -2  # h = -a/2
+        k = solution[1,0] / -2  # k = -b/2
+        self.center.setX(h)
+        self.center.setY(k)
+        self.radius = sqrt(h**2 + k**2 - solution[2,0]) # r^2 = h^2 + k^2 - f
+        self.circlePoints = [point1, point2, point3]
+
+    def analyze(self):
+        # For each line group, figure out if each line goes through the center of the circle or close to it.
+        for lc in self.lineCollections:
+            for line in lc.lines:
+                print minDistance(self.center, line)
