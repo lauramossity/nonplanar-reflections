@@ -1,6 +1,8 @@
 \documentclass{article}
 %\usepackage{lgrind}
+\usepackage{graphicx}
 \pagestyle{plain}
+\bibliographystyle{apalike}
 
 \begin{document}
 
@@ -16,6 +18,21 @@
 \section{Prior Work}
 \subsection{Reflections on Planar Surfaces}
 % TODO where and how to cite O'Brien/Farid paper
+% Summary of planar reflections
+\begin{figure}[h!]
+	\centering
+    	\includegraphics[width=0.9\textwidth]{planar-vanishing-point-forged}
+	\caption{Demonstration of vanishing point inconsistency. The lines corresponding to the man on the left converge to a different vanishing point than those from the rest of the scene, so it is likely that the man and his reflection were photoshopped into the scene.}
+	\label{planar-vanishing-point-forged}
+\end{figure}
+Recent research into properties of images that can be exploited to find inconsistencies has shown that an object in an image and its reflection in a mirror must have certain geometric properties in a real, unmanipulated image. O'Brien and Farid's 2012 paper discusses several techniques for determining whether or not an image that contains a planar mirror is consistent. All of these techniques are derived directly from linear perspective projection geometry. \\
+The first step to all of the techniques is obtaining lines in the image that are parallel in three-dimensional scene space (or should be if the image is genuine). The first couple of techniques require hand-picking matching points between the original objects in the scene and their virtual (reflected) counterparts. Then, straight lines are drawn connecting these point pairs out to infinity. These lines, if drawn through the same planar mirror, must all intersect at a single vanishing point. If they don't intersect cleanly, or intersect at multiple vanishing points, the image can be assumed to be forged, as seen in Figure~\ref{planar-vanishing-point-forged}. Furthermore, the midpoints of the same lines, in three-dimensional scene space, must also plausibly appear to intersect the reflective surface. Finally, if there are orthogonal parallel lines in the image (for example, on the frame of a mirror), we can check if there is a consistent position for the center of projection, or point camera.
+\cite{obrien12}
+
+% TODO figure demonstrating vanishing point forgery
+% TODO figure demonstrating midpoint forgery
+% TODO figure demonstrating inconsistent camera
+
 \subsection{Other Related Work}
 Shadows
 
@@ -23,10 +40,17 @@ Shadows
 \subsection{Assumptions}
 To simplify the geometry of this analysis, we will restrict the form of our non-planar mirrors to various types of quadric surfaces. This is likely to be good enough for typical use cases because most general curves encountered in the real world can be approximated as either a quadric surface or a set of quadric surfaces. \\
 We also assume the camera used to take any of the images analyzed is a point camera, which is a reasonable assumption considering both the size of most digital camera sensors, and the fact that the camera would have to be far enough away from the subjects of the photograph to capture everything required to perform the analysis.
+An important idea to note is that showing that an image is consistent according to these techniques is not sufficient to prove that the image is genuine, because the image could have had some counter-forensic techniques applied or been manipulated in a way that is unrelated to reflective geometry.
 
 \subsection{Principles of Reflective Geometry}
+% Will contain some more technical references to O'Brien/Farid paper where needed
+The lines drawn between these point pairs represent parallel lines in 3-space. An axiom of linear perspective projection is that parallel lines projected onto a 2-D image 
 
 \subsection{Principles of Camera Projection}
+
+\subsection{Vanishing Points}
+
+% TODO actual techniques
 
 \section{Implementation}
 In order to expedite the process of obtaining images that meet a variety of very specific conditions, all images used to test these algorithms were computer-generated using Blender 2.68a.
@@ -36,10 +60,12 @@ In order to expedite the process of obtaining images that meet a variety of very
 \subsection{Results}
 \subsection{Future Work}
 
-
+\clearpage
 
 \appendix
 %\include{appa}
-%\include{biblio}
+%\clearpage
+
+\bibliography{Master}
 \end{document}
 

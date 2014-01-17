@@ -17,11 +17,7 @@ class Canvas(QtGui.QWidget):
         super(Canvas, self).__init__(parent)
 
         self.image = QtGui.QImage()
-        self._analysisMode = 0
-        self._toolMode = 0
-        self._points = []
-
-        self.analysisObject = ReflectionAnalysis.PlanarAnalysis()
+        self.resetMetadata()
 
     def openImage(self, fileName):
         loadedImage = QtGui.QImage()
@@ -32,13 +28,21 @@ class Canvas(QtGui.QWidget):
         self.resizeImage(loadedImage, newSize)
         self.image = loadedImage
         #self.modified = False
+        self.resetMetadata()
         self.update()
         return True
+
+    def resetMetadata(self):
+        self.setAnalysisMode(AnalysisMode.SPHERICAL)
+        self.setToolMode(ToolMode.POINT_MATCHING)
+        self.update()
 
     def paintEvent(self, event):
         painter = QtGui.QPainter(self)
         painter.drawImage(QtCore.QPoint(0, 0), self.image)
         self.analysisObject.draw(painter, self.contentsRect())
+        for p in self._points:
+            painter.drawEllipse(p, 2, 2)
 
     def mousePressEvent(self, event):
         if event.button() == QtCore.Qt.LeftButton and not self.image.isNull():
@@ -59,7 +63,6 @@ class Canvas(QtGui.QWidget):
                     self._points = []
                 else:
                     self._points.append(event.pos())
-                print "appending", event.pos()
             else:
                 print "Invalid input configuration"
 
@@ -148,9 +151,9 @@ class MainWindow(QtGui.QMainWindow):
         self.analyzeAct = QtGui.QAction("Analyze", self, toolTip="Perform an analysis based on the current information.", triggered=self.canvas.analyze)
 
         # set up initial configuration
-        self.setPlanarAct.setChecked(True)
-        self.setAnalysisMode(AnalysisMode.PLANAR)
-        self.setPointMatchingToolAct.setChecked(True)
+        self.setSphereAct.setChecked(True)
+        self.setAnalysisMode(AnalysisMode.SPHERICAL)
+        self.setCircleToolAct.setChecked(True)
         self.setToolMode(ToolMode.POINT_MATCHING)
 
     def createMenus(self):
