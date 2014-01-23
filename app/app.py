@@ -18,6 +18,7 @@ class Canvas(QtGui.QWidget):
 
         self.image = QtGui.QImage()
         self.resetMetadata()
+        self.zoom = 1.0
 
     def openImage(self, fileName):
         loadedImage = QtGui.QImage()
@@ -39,6 +40,8 @@ class Canvas(QtGui.QWidget):
 
     def paintEvent(self, event):
         painter = QtGui.QPainter(self)
+        painter.scale(self.zoom, self.zoom)
+
         painter.drawImage(QtCore.QPoint(0, 0), self.image)
         self.analysisObject.draw(painter, self.contentsRect())
         for p in self._points:
@@ -49,20 +52,20 @@ class Canvas(QtGui.QWidget):
             #event.pos
             if self._analysisMode == AnalysisMode.SPHERICAL and self._toolMode == ToolMode.CIRCLE:
                 # make circle
-                # TODO call analysisObject.addCircle() if there are 2 points saved
-                if len(self._points) > 1:
-                    self.analysisObject.addCircle(self._points[-1], self._points[-2], event.pos())
+
+                self._points.append(event.pos() / self.zoom)
+                # call analysisObject.addCircle() if there are 3 points saved
+                if len(self._points) > 4:
+                    self.analysisObject.addCircle(self._points, self.image)
                     self._points = []
-                else:
-                    self._points.append(event.pos())
             elif self._toolMode == ToolMode.POINT_MATCHING:
                 # make lines
                 if self._points:
                     # there is another point there, so make a line
-                    self.analysisObject.addLine(event.pos(), self._points[-1])
+                    self.analysisObject.addLine(event.pos() / self.zoom, self._points[-1])
                     self._points = []
                 else:
-                    self._points.append(event.pos())
+                    self._points.append(event.pos() / self.zoom)
             else:
                 print "Invalid input configuration"
 
@@ -89,6 +92,7 @@ class Canvas(QtGui.QWidget):
             print "Error: Undefined analysis mode"
 
         self._points = []
+        self.update()
 
     def setToolMode(self, newMode):
         self._toolMode = newMode
@@ -99,6 +103,11 @@ class Canvas(QtGui.QWidget):
 
     def analyze(self):
         self.analysisObject.analyze()
+
+    def changeZoom(self, change):
+        self.zoom += change
+        self.update()
+
 
 class MainWindow(QtGui.QMainWindow):
     def __init__(self):
@@ -132,6 +141,9 @@ class MainWindow(QtGui.QMainWindow):
     def setToolMode(self, newMode):
         self.canvas.setToolMode(newMode)
 
+    def changeZoom(self, change):
+        self.canvas.changeZoom(change)
+
     def createActions(self):
         self.openAct = QtGui.QAction("&Open...", self, shortcut="Ctrl+O",
                 triggered=self.open)
@@ -150,10 +162,13 @@ class MainWindow(QtGui.QMainWindow):
 
         self.analyzeAct = QtGui.QAction("Analyze", self, toolTip="Perform an analysis based on the current information.", triggered=self.canvas.analyze)
 
+        self.zoomInAct = QtGui.QAction("+", self, toolTip="Zoom in", triggered=partial(self.changeZoom, .02))
+        self.zoomOutAct = QtGui.QAction("-", self, toolTip="Zoom out", triggered=partial(self.changeZoom, -.02))
+
         # set up initial configuration
         self.setSphereAct.setChecked(True)
         self.setAnalysisMode(AnalysisMode.SPHERICAL)
-        self.setCircleToolAct.setChecked(True)
+        self.setPointMatchingToolAct.setChecked(True)
         self.setToolMode(ToolMode.POINT_MATCHING)
 
     def createMenus(self):
@@ -178,16 +193,16 @@ class MainWindow(QtGui.QMainWindow):
 
         toolBar.addAction(self.analyzeAct)
 
+        toolBar.addSeparator()
+
+        toolBar.addAction(self.zoomInAct)
+        toolBar.addAction(self.zoomOutAct)
+
 def main():
     app = QtGui.QApplication(argv)
     window = MainWindow()
     window.show()
     exit(app.exec_())
-
-    #root = Tkinter.Tk()
-    #root.withdraw()
-
-    #filename = tkFileDialog.askopenfilename()
     
 
 #------------------------------------------------------------------------

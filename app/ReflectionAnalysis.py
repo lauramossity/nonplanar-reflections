@@ -22,6 +22,22 @@ TODO:
 
 '''
 
+# http://stackoverflow.com/questions/18406149/pyqt-pyside-how-do-i-convert-qimage-into-opencvs-mat-format
+import cv2
+import numpy as np
+def convertQImageToMat(incomingImage):
+    '''  Converts a QImage into an opencv MAT format  '''
+
+    incomingImage = incomingImage.convertToFormat(4)
+
+    width = incomingImage.width()
+    height = incomingImage.height()
+
+    ptr = incomingImage.bits()
+    ptr.setsize(incomingImage.byteCount())
+    arr = np.array(ptr).reshape(height, width, 4)  #  Copies the data
+    return arr
+
 # Find the intersection points between a QLine and a QRect
 def intersectLineRect(line, rect):
     x1, y1, x2, y2 = rect.getCoords()
@@ -211,7 +227,32 @@ class SphericalAnalysis(AbstractAnalysis):
                 painter.drawEllipse(p, 2, 2)
             painter.drawEllipse(self.center,2,2)
 
-    def addCircle(self, point1, point2, point3):
+    def solveCircle(self, points):
+        # ax + by + c = x^2 + y^2
+        Alist = []
+        blist = []
+        for point in points:
+            Alist.append([point.x(), point.y(), 1])
+            blist.append([-(point.x()**2+point.y()**2)])
+        #A = np.array([[point1.x(),point1.y(),1], [point2.x(),point2.y(),1], [point3.x(),point3.y(),1]])
+        #b = np.array([[-(point1.x()**2+point1.y()**2)], [-(point2.x()**2+point2.y()**2)], [-(point3.x()**2+point3.y()**2)]])
+        #solution = np.linalg.solve(A,b)
+        A = np.array(Alist)
+        b = np.array(blist)
+        #solution1 = np.linalg.solve(A,b)
+        solution = np.linalg.lstsq(A,b)[0]
+
+        print solution
+        #print solution1
+
+        h = solution[0,0] / -2  # h = -a/2
+        k = solution[1,0] / -2  # k = -b/2
+
+        r = sqrt(h**2 + k**2 - solution[2,0]) # r^2 = h^2 + k^2 - f
+
+        return h, k, r
+
+    def addCircle(self, argPoints, image):
         '''
         def equations(p):
             h, k, r = p
@@ -233,17 +274,71 @@ class SphericalAnalysis(AbstractAnalysis):
         self.center.setY(k)
         self.circlePoints = [point1, point2, point3]
         '''
-        # ax + by + c = x^2 + y^2
-        A = np.array([[point1.x(),point1.y(),1], [point2.x(),point2.y(),1], [point3.x(),point3.y(),1]])
-        b = np.array([[-(point1.x()**2+point1.y()**2)], [-(point2.x()**2+point2.y()**2)], [-(point3.x()**2+point3.y()**2)]])
-        solution = np.linalg.solve(A,b)
+        h, k, r = self.solveCircle(argPoints)
 
-        h = solution[0,0] / -2  # h = -a/2
-        k = solution[1,0] / -2  # k = -b/2
         self.center.setX(h)
         self.center.setY(k)
-        self.radius = sqrt(h**2 + k**2 - solution[2,0]) # r^2 = h^2 + k^2 - f
-        self.circlePoints = [point1, point2, point3]
+        self.radius = r
+        self.circlePoints = argPoints
+
+        print self.circlePoints
+
+        # Improve the points picked using simple edge detection
+        # For each point picked:
+        newPoints = []
+
+        for point in self.circlePoints:
+
+            newPointCandidates = []
+            restrictionLine = QtCore.QLineF(point, self.center)
+            slopeVector = QtCore.QPointF()
+            if restrictionLine.dx() == 0:
+                slopeVector.setX(0)
+                slopeVector.setY(1)
+            else:
+                slopeVector.setX(1)
+                slopeVector.setY(restrictionLine.dy() / restrictionLine.dx())
+
+            for i in range(-7, 7):
+                if i == 0:
+                    newPointCandidates.append(QtCore.QPointF(point))
+                    continue
+                newPointCandidates.append(QtCore.QPointF(point) + (i * slopeVector))
+
+            absdiff = []
+            for j in range(len(newPointCandidates) - 1): # for all points except the last one
+                absdiff.append(abs(image.pixel(newPointCandidates[j].toPoint())-image.pixel(newPointCandidates[j+1].toPoint())))
+
+            print absdiff
+            maxdiff, idx = max( (v, i) for i, v in enumerate(absdiff) )
+            print maxdiff, idx
+            if maxdiff != 0:
+                newPoints.append(newPointCandidates[idx])
+            else:
+                newPoints.append(QtCore.QPointF(point))
+            
+            '''
+            region = image.copy(point.x() - 10, point.y() - 10, 21, 21)
+            matRegion = convertQImageToMat(region)
+            '''
+
+        print newPoints
+
+        self.circlePoints = newPoints
+        h, k, r = self.solveCircle(newPoints)
+
+        print "Center shifted by", self.center.x() - h, self.center.y() - k
+
+        self.center.setX(h)
+        self.center.setY(k)
+        self.radius = r
+
+
+        # Make a list of the points within 10px of the picked point along the radial of the detected center
+        # Find the differences between the points in the list and pick the max as the new point
+
+
+        #Redo circle solution with new points
 
     def analyze(self):
         # For each line group, figure out if each line goes through the center of the circle or close to it.

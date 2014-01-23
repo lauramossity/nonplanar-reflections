@@ -1,5 +1,10 @@
 \begin{thebibliography}{}
 
+\bibitem[Hartley and Zisserman, 2004]{hartley}
+Hartley, R. and Zisserman, A. (2004).
+\newblock {\em Multiple View Geometry in Computer Vision}.
+\newblock Cambridge University Press, 2nd edition.
+
 \bibitem[O'Brien and Farid, 2012]{obrien12}
 O'Brien, J.~F. and Farid, H. (2012).
 \newblock Exposing photo manipulation with inconsistent reflections.
