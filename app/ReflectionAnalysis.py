@@ -253,27 +253,7 @@ class SphericalAnalysis(AbstractAnalysis):
         return h, k, r
 
     def addCircle(self, argPoints, image):
-        '''
-        def equations(p):
-            h, k, r = p
-            return ( (point1.x()-h)**2 + (point1.y()-k)**2 - r**2,
-                (point2.x()-h)**2 + (point3.y()-k)**2 - r**2,
-                (1000 * (point3.x()-h)**2 + (point3.y()-k)**2 - r**2) )
 
-        sumX = point1.x() + point2.x() + point3.x()
-        sumY = point1.y() + point2.y() + point3.y()
-        guessX = sumX/3.0
-        guessY = sumY/3.0
-        guess = (guessX, guessY, hypot((sumX - 3*guessX)/3, (sumY - 3*guessY)))
-
-        h, k, self.radius = fsolve(equations, guess)
-
-        print "Error:", equations((h,k,self.radius))
-
-        self.center.setX(h)
-        self.center.setY(k)
-        self.circlePoints = [point1, point2, point3]
-        '''
         h, k, r = self.solveCircle(argPoints)
 
         self.center.setX(h)
@@ -289,6 +269,7 @@ class SphericalAnalysis(AbstractAnalysis):
 
         for point in self.circlePoints:
 
+            # Aggregate candidates for a new point by finding contiguous points towards and away from the center obtained previously
             newPointCandidates = []
             restrictionLine = QtCore.QLineF(point, self.center)
             slopeVector = QtCore.QPointF()
@@ -305,15 +286,16 @@ class SphericalAnalysis(AbstractAnalysis):
                     continue
                 newPointCandidates.append(QtCore.QPointF(point) + (i * slopeVector))
 
+            # Take the difference between each point and the next point
             absdiff = []
             for j in range(len(newPointCandidates) - 1): # for all points except the last one
                 absdiff.append(abs(image.pixel(newPointCandidates[j].toPoint())-image.pixel(newPointCandidates[j+1].toPoint())))
 
-            print absdiff
+            # replace the old point with the spot in between the two pixels with the max difference
             maxdiff, idx = max( (v, i) for i, v in enumerate(absdiff) )
             print maxdiff, idx
             if maxdiff != 0:
-                newPoints.append(newPointCandidates[idx])
+                newPoints.append((newPointCandidates[idx] + newPointCandidates[idx+1]) / 2)
             else:
                 newPoints.append(QtCore.QPointF(point))
             
