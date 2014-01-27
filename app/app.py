@@ -25,8 +25,11 @@ class Canvas(QtGui.QWidget):
         if not loadedImage.load(fileName):
             return False
 
-        newSize = loadedImage.size().expandedTo(self.size())
-        self.resizeImage(loadedImage, newSize)
+        #newSize = loadedImage.size().expandedTo(self.size())
+        #self.resizeImage(loadedImage, newSize)
+        self.resize(loadedImage.size())
+        mainWindow = self.parentWidget().parentWidget()
+        mainWindow.resize(max(loadedImage.size().width(), mainWindow.sizeHint().width()), mainWindow.sizeHint().height() + loadedImage.size().height())
         self.image = loadedImage
         #self.modified = False
         self.resetMetadata()
@@ -54,8 +57,8 @@ class Canvas(QtGui.QWidget):
                 # make circle
 
                 self._points.append(event.pos() / self.zoom)
-                # call analysisObject.addCircle() if there are 3 points saved
-                if len(self._points) > 4:
+                # call analysisObject.addCircle() if there are 9 points saved
+                if len(self._points) > 8:
                     self.analysisObject.addCircle(self._points, self.image)
                     self._points = []
             elif self._toolMode == ToolMode.POINT_MATCHING:
@@ -108,13 +111,22 @@ class Canvas(QtGui.QWidget):
         self.zoom += change
         self.update()
 
+    def clearCurrentPoints(self):
+        self._points = []
+        self.update()
+
+    def undoLine(self):
+        self.analysisObject.undoLine()
+        self.update()
 
 class MainWindow(QtGui.QMainWindow):
     def __init__(self):
         super(MainWindow, self).__init__()
 
         self.canvas = Canvas()
-        self.setCentralWidget(self.canvas)
+        self.scrollarea = QtGui.QScrollArea()
+        self.scrollarea.setWidget(self.canvas)
+        self.setCentralWidget(self.scrollarea)
 
         self.createActions()
         self.createMenus()
@@ -131,12 +143,15 @@ class MainWindow(QtGui.QMainWindow):
     def setAnalysisMode(self, newMode):
         self.canvas.setAnalysisMode(newMode)
 
+        '''
         if newMode == AnalysisMode.SPHERICAL:
             self.setCircleToolAct.setEnabled(True)
         else:
             self.setCircleToolAct.setEnabled(False)
-        
+        '''
+
         self.canvas.setToolMode(ToolMode.POINT_MATCHING)
+        self.setPointMatchingToolAct.setEnabled(True)
 
     def setToolMode(self, newMode):
         self.canvas.setToolMode(newMode)
@@ -165,6 +180,10 @@ class MainWindow(QtGui.QMainWindow):
         self.zoomInAct = QtGui.QAction("+", self, toolTip="Zoom in", triggered=partial(self.changeZoom, .02))
         self.zoomOutAct = QtGui.QAction("-", self, toolTip="Zoom out", triggered=partial(self.changeZoom, -.02))
 
+        self.clearCurrentPointsAct = QtGui.QAction("Clear", self, toolTip="Clear the current set of points that are not yet formed into a shape", triggered=self.canvas.clearCurrentPoints, shortcut='C')
+
+        self.undoLineAct = QtGui.QAction("Undo Last Line", self, toolTip="Remove the last line created", triggered=self.canvas.undoLine, shortcut='Ctrl+Z')
+
         # set up initial configuration
         self.setSphereAct.setChecked(True)
         self.setAnalysisMode(AnalysisMode.SPHERICAL)
@@ -174,6 +193,7 @@ class MainWindow(QtGui.QMainWindow):
     def createMenus(self):
         fileMenu = QtGui.QMenu("&File", self)
         fileMenu.addAction(self.openAct)
+        fileMenu.addAction(self.undoLineAct)
 
         self.menuBar().addMenu(fileMenu)
 
@@ -197,6 +217,10 @@ class MainWindow(QtGui.QMainWindow):
 
         toolBar.addAction(self.zoomInAct)
         toolBar.addAction(self.zoomOutAct)
+
+        toolBar.addSeparator()
+
+        toolBar.addAction(self.clearCurrentPointsAct)
 
 def main():
     app = QtGui.QApplication(argv)

@@ -4,7 +4,7 @@ import numpy as np
 import Tkinter, tkFileDialog
 import random
 import itertools
-from math import hypot, sqrt
+from math import hypot, sqrt, floor
 
 from PySide import QtCore
 from PySide.QtGui import QColor
@@ -15,16 +15,8 @@ from scipy.optimize import fsolve
 
 
 
-'''
-TODO:
-- Add border/offset only when cluster is found
-- create an intersectionsCollection class
-
-'''
 
 # http://stackoverflow.com/questions/18406149/pyqt-pyside-how-do-i-convert-qimage-into-opencvs-mat-format
-import cv2
-import numpy as np
 def convertQImageToMat(incomingImage):
     '''  Converts a QImage into an opencv MAT format  '''
 
@@ -75,9 +67,14 @@ class LineCollection:
         self.lines.append(newLine)
         self.intersections = self._findIntersections()
 
+    def undoLine(self):
+        if self.lines:
+            self.lines.pop()
+            self.intersection = self._findIntersections()
+
     def draw(self, painter, borderRect, color):
         # TODO: calculate border points for each line, draw a line between those points
-        painter.setPen(QColor(color[0], color[1], color[2]))
+        painter.setPen(color)
         for l in self.lines:
             borderPoints = intersectLineRect(l, borderRect)
             painter.drawLine(borderPoints[0], borderPoints[1]) # Unsafe, may not return this many points
@@ -113,16 +110,25 @@ class AbstractAnalysis:
 
     def __init__(self):
         self.lineCollections = []
-        self.lineCollections.append(LineCollection())
-        self.openCollectionIdx = 0
+        self.openCollectionIdx = -1
         self.colors = []
-        self.colors.append((random.randint(0,255),random.randint(0,255),random.randint(0,255)))
+        self.startNewLineCollection()
 
     # method to start a new collection for a new object in the scene
     def startNewLineCollection(self):
         self.lineCollections.append(LineCollection())
         self.openCollectionIdx += 1
-        self.colors.append((random.randint(0,255),random.randint(0,255),random.randint(0,255)))
+        newColor = QColor()
+        # http://martin.ankerl.com/2009/12/09/how-to-create-random-colors-programmatically/
+        '''
+        rand = random.random()
+        rand += 0.618033988749895
+        rand %= 1
+        '''
+        phi = 0.618033988749895
+        hue = self.openCollectionIdx * phi - floor(self.openCollectionIdx * phi)
+        newColor.setHsv(int(hue*256), 120 + int(random.random()*(240-120+1)), 242)
+        self.colors.append(newColor)
 
     def draw(self, painter, borderRect):
         # draw all lines
@@ -135,6 +141,9 @@ class AbstractAnalysis:
     def addLine(self, point1, point2):
         newLine = QtCore.QLineF(point1, point2)
         self.lineCollections[self.openCollectionIdx].addLine(newLine)
+
+    def undoLine(self):
+        self.lineCollections[self.openCollectionIdx].undoLine()
 
     @abstractmethod
     def analyze(self):
@@ -239,11 +248,7 @@ class SphericalAnalysis(AbstractAnalysis):
         #solution = np.linalg.solve(A,b)
         A = np.array(Alist)
         b = np.array(blist)
-        #solution1 = np.linalg.solve(A,b)
         solution = np.linalg.lstsq(A,b)[0]
-
-        print solution
-        #print solution1
 
         h = solution[0,0] / -2  # h = -a/2
         k = solution[1,0] / -2  # k = -b/2
@@ -261,8 +266,6 @@ class SphericalAnalysis(AbstractAnalysis):
         self.radius = r
         self.circlePoints = argPoints
 
-        print self.circlePoints
-
         # Improve the points picked using simple edge detection
         # For each point picked:
         newPoints = []
@@ -276,24 +279,30 @@ class SphericalAnalysis(AbstractAnalysis):
             if restrictionLine.dx() == 0:
                 slopeVector.setX(0)
                 slopeVector.setY(1)
+            elif abs(restrictionLine.dy()) > abs(restrictionLine.dx()):
+                slopeVector.setX(restrictionLine.dx() / restrictionLine.dy())
+                slopeVector.setY(1)
             else:
                 slopeVector.setX(1)
                 slopeVector.setY(restrictionLine.dy() / restrictionLine.dx())
 
             for i in range(-7, 7):
                 if i == 0:
-                    newPointCandidates.append(QtCore.QPointF(point))
+                    newPointCandidates.append(point)
                     continue
-                newPointCandidates.append(QtCore.QPointF(point) + (i * slopeVector))
+                diff = i * slopeVector
+                newPointCandidates.append(point + QtCore.QPoint(round(diff.x()), round(diff.y())))
+
+            print newPointCandidates
 
             # Take the difference between each point and the next point
             absdiff = []
             for j in range(len(newPointCandidates) - 1): # for all points except the last one
-                absdiff.append(abs(image.pixel(newPointCandidates[j].toPoint())-image.pixel(newPointCandidates[j+1].toPoint())))
+                absdiff.append(abs(image.pixel(newPointCandidates[j])-image.pixel(newPointCandidates[j+1])))
 
             # replace the old point with the spot in between the two pixels with the max difference
             maxdiff, idx = max( (v, i) for i, v in enumerate(absdiff) )
-            print maxdiff, idx
+            print "maxdiff: %f" % maxdiff
             if maxdiff != 0:
                 newPoints.append((newPointCandidates[idx] + newPointCandidates[idx+1]) / 2)
             else:
@@ -303,8 +312,6 @@ class SphericalAnalysis(AbstractAnalysis):
             region = image.copy(point.x() - 10, point.y() - 10, 21, 21)
             matRegion = convertQImageToMat(region)
             '''
-
-        print newPoints
 
         self.circlePoints = newPoints
         h, k, r = self.solveCircle(newPoints)
@@ -324,6 +331,9 @@ class SphericalAnalysis(AbstractAnalysis):
 
     def analyze(self):
         # For each line group, figure out if each line goes through the center of the circle or close to it.
+        i = 1
         for lc in self.lineCollections:
+            print "Line Collection %s" % i
+            i += 1
             for line in lc.lines:
                 print minDistance(self.center, line)
