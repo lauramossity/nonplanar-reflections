@@ -33,6 +33,7 @@ class Canvas(QtGui.QWidget):
         self.image = loadedImage
         #self.modified = False
         self.resetMetadata()
+        self.zoom = 1.0
         self.update()
         return True
 
@@ -109,6 +110,7 @@ class Canvas(QtGui.QWidget):
 
     def changeZoom(self, change):
         self.zoom += change
+        self.resize(self.image.size()*self.zoom)
         self.update()
 
     def clearCurrentPoints(self):
@@ -142,16 +144,14 @@ class MainWindow(QtGui.QMainWindow):
     # can only be called after initializing actions in createActions
     def setAnalysisMode(self, newMode):
         self.canvas.setAnalysisMode(newMode)
-
-        '''
+        
         if newMode == AnalysisMode.SPHERICAL:
             self.setCircleToolAct.setEnabled(True)
         else:
             self.setCircleToolAct.setEnabled(False)
-        '''
-
+        
         self.canvas.setToolMode(ToolMode.POINT_MATCHING)
-        self.setPointMatchingToolAct.setEnabled(True)
+        self.setPointMatchingToolAct.setChecked(True)
 
     def setToolMode(self, newMode):
         self.canvas.setToolMode(newMode)

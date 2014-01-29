@@ -248,7 +248,10 @@ class SphericalAnalysis(AbstractAnalysis):
         #solution = np.linalg.solve(A,b)
         A = np.array(Alist)
         b = np.array(blist)
-        solution = np.linalg.lstsq(A,b)[0]
+        rawSolution = np.linalg.lstsq(A,b)
+        solution = rawSolution[0]
+
+        print "Residuals:", rawSolution[1]
 
         h = solution[0,0] / -2  # h = -a/2
         k = solution[1,0] / -2  # k = -b/2
@@ -286,7 +289,7 @@ class SphericalAnalysis(AbstractAnalysis):
                 slopeVector.setX(1)
                 slopeVector.setY(restrictionLine.dy() / restrictionLine.dx())
 
-            for i in range(-7, 7):
+            for i in range(-5, 5):
                 if i == 0:
                     newPointCandidates.append(point)
                     continue
