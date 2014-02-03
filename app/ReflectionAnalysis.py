@@ -338,5 +338,14 @@ class SphericalAnalysis(AbstractAnalysis):
         for lc in self.lineCollections:
             print "Line Collection %s" % i
             i += 1
+            print "Minimum distances from each line to the center:"
             for line in lc.lines:
                 print minDistance(self.center, line)
+
+            if len(lc.intersections) > 2:
+                intersectionPointsAsTuples = [p.toTuple() for p in lc.intersections]
+                mean = QtCore.QPointF(*np.mean(intersectionPointsAsTuples, axis=0))
+                stdDev = QtCore.QPointF(*np.std(intersectionPointsAsTuples, axis=0))
+
+                pointsWithinStdDev = [p for p in lc.intersections if np.linalg.norm((p-mean).toTuple()) <= np.linalg.norm(stdDev.toTuple())]
+                print len(pointsWithinStdDev), "out of", len(lc.intersections), "intersections within 1 standard deviation of the mean"
