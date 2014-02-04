@@ -47,7 +47,7 @@
 
 Recent research into properties of images that can be exploited to find inconsistencies has shown that an object in an image and its reflection in a mirror must have certain geometric properties in a real, unmanipulated image. O'Brien and Farid's 2012 paper discusses several techniques for determining whether or not an image that contains a planar mirror is consistent.\nocite{obrien12} All of these techniques are derived directly from linear perspective projection geometry.
 
-The first step to all of the techniques is obtaining lines in the image that are parallel in three-dimensional scene space (or should be if the image is genuine). The first couple of techniques require hand-picking matching points between the original objects in the scene and their virtual (reflected) counterparts. Then, straight lines are drawn connecting these point pairs out to infinity. These lines, if drawn through the same planar mirror, must all intersect at a single vanishing point. If they don't intersect cleanly, or intersect at multiple vanishing points, the image can be assumed to be forged, as seen in Figure~\ref{planar-vanishing-point-forged}. Furthermore, the midpoints of the same lines, in three-dimensional scene space, must also plausibly appear to intersect the reflective surface, as in Figure~\ref{planar-midpoint-genuine}. Finally, as in Figure~\ref{center-of-projection-planar-genuine}, if there are orthogonal parallel lines in the image (for example, on the frame of a mirror), we can check if there is a consistent position for the center of projection, or point camera.
+The first step to all of the techniques is obtaining lines in the image that are parallel in three-dimensional scene space (or should be if the image is genuine). The first couple of techniques require hand-picking matching points between the original objects in the scene and their virtual (reflected) counterparts. Then, straight lines are drawn connecting these point pairs out to infinity. These lines, if drawn through the same planar mirror, must all intersect at a single vanishing point. If they don't intersect cleanly, or intersect at multiple vanishing points, the image can be assumed to be forged, as seen in Figure~\ref{planar-vanishing-point-forged}. Furthermore, the midpoints of the same lines in three-dimensional scene space must also plausibly appear to intersect the reflective surface, as in Figure~\ref{planar-midpoint-genuine}. Finally, as in Figure~\ref{center-of-projection-planar-genuine}, if there are orthogonal parallel lines in the image (for example, on the frame of a mirror), we can check if there is a consistent position for the center of projection, or point camera.
 
 
 \subsection{Other Related Work}
@@ -77,6 +77,19 @@ In the case of a curved surface, the ray is still parallel to the normal at the 
 
 \subsection{Reflective Sphere Geometry}
 % figure: colinearity of radius and projection of incident ray
+\begin{figure}
+	\centering
+    	\includegraphics[width=0.6\textwidth]{colinear-radius}
+	\caption{Since the point $P$, the reflection point $B$, the camera $C$, and the normal $N$ are all coplanar, and $N$ is an extension of the radius of a sphere, then $PB$ and any radius must be coplanar.}
+	\label{colinear-radius}
+\end{figure}
+
+\begin{figure}
+	\centering
+    	\includegraphics[width=0.6\textwidth]{colinear-radius-camera-view}
+	\caption{A view of Figure~\ref{colinear-radius} from the point of view of the camera $C$.}
+	\label{colinear-radius-camera-view}
+\end{figure}
 
 
 
@@ -86,7 +99,6 @@ In order to expedite the process of obtaining images that meet a variety of very
 The application consists of a Python script that uses PySide for GUI and drawing, and numpy/scipy for mathematical calculations.
 
 \subsection{Circle Finding}
-\subsection{Edge Detection}
 rudimentary edge detection to assist picking points for the circles
 limitation: edges are relatively easy to find in these test images- plain background
 
@@ -96,6 +108,7 @@ limitation: edges are relatively easy to find in these test images- plain backgr
 
 \section{Conclusion}
 \subsection{Results}
+
 \subsubsection{Effects of Human Error}
 \subsection{Future Work}
 

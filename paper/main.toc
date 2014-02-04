@@ -10,8 +10,8 @@
 \contentsline {section}{\numberline {4}Implementation}{8}
 \contentsline {subsection}{\numberline {4.1}Circle Finding}{8}
 \contentsline {subsection}{\numberline {4.2}Edge Detection}{8}
-\contentsline {subsection}{\numberline {4.3}Distortion from Perspective Projection}{9}
-\contentsline {section}{\numberline {5}Conclusion}{9}
-\contentsline {subsection}{\numberline {5.1}Results}{9}
-\contentsline {subsubsection}{\numberline {5.1.1}Effects of Human Error}{9}
-\contentsline {subsection}{\numberline {5.2}Future Work}{9}
+\contentsline {subsection}{\numberline {4.3}Distortion from Perspective Projection}{10}
+\contentsline {section}{\numberline {5}Conclusion}{10}
+\contentsline {subsection}{\numberline {5.1}Results}{10}
+\contentsline {subsubsection}{\numberline {5.1.1}Effects of Human Error}{10}
+\contentsline {subsection}{\numberline {5.2}Future Work}{10}

@@ -349,3 +349,7 @@ class SphericalAnalysis(AbstractAnalysis):
 
                 pointsWithinStdDev = [p for p in lc.intersections if np.linalg.norm((p-mean).toTuple()) <= np.linalg.norm(stdDev.toTuple())]
                 print len(pointsWithinStdDev), "out of", len(lc.intersections), "intersections within 1 standard deviation of the mean"
+
+                clusterCenter = np.mean(pointsWithinStdDev, axis=0)
+                print "Cluster is at", clusterCenter.toTuple(), ", which is ", (clusterCenter-self.center).toTuple(), "px away from the circle center"
+
