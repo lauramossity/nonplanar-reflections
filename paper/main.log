@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.4-1.40.13 (MiKTeX 2.9 64-bit) (preloaded format=pdflatex 2013.12.2)  3 FEB 2014 10:23
+This is pdfTeX, Version 3.1415926-2.4-1.40.13 (MiKTeX 2.9 64-bit) (preloaded format=pdflatex 2013.12.2)  7 FEB 2014 00:23
 entering extended mode
 **main.tex
 (C:\Users\Laura\Documents\Courses\Thesis\git\paper\main.tex
@@ -13,21 +13,27 @@ german-x-2012-05-30, nynorsk, oriya, panjabi, pinyin, polish, portuguese, roman
 ian, russian, sanskrit, serbian, slovak, slovenian, spanish, swedish, swissgerm
 an, tamil, telugu, turkish, turkmen, ukenglish, ukrainian, uppersorbian, usengl
 ishmax, welsh, loaded.
-("C:\Program Files\MiKTeX 2.9\tex\latex\base\article.cls"
-Document Class: article 2007/10/19 v1.4h Standard LaTeX document class
-("C:\Program Files\MiKTeX 2.9\tex\latex\base\size10.clo"
-File: size10.clo 2007/10/19 v1.4h Standard LaTeX file (size option)
+("C:\Program Files\MiKTeX 2.9\tex\latex\thesis\thesis.cls"
+Document Class: thesis 1996/25/01 1.0g LaTeX document class (wm).
+\hours=\count79
+\minutes=\count80
+("C:\Program Files\MiKTeX 2.9\tex\latex\base\bk10.clo"
+File: bk10.clo 2007/10/19 v1.4h Standard LaTeX file (size option)
 )
-\c@part=\count79
-\c@section=\count80
-\c@subsection=\count81
-\c@subsubsection=\count82
-\c@paragraph=\count83
-\c@subparagraph=\count84
-\c@figure=\count85
-\c@table=\count86
-\abovecaptionskip=\skip41
-\belowcaptionskip=\skip42
+\c@part=\count81
+\c@chapter=\count82
+\c@section=\count83
+\c@subsection=\count84
+\c@subsubsection=\count85
+\c@paragraph=\count86
+\c@subparagraph=\count87
+\beforechaptervspace=\skip41
+\afterchaptervspace=\skip42
+\exampleindent=\skip43
+\c@figure=\count88
+\c@table=\count89
+\abovecaptionskip=\skip44
+\belowcaptionskip=\skip45
 \bibindent=\dimen102
 )
 ("C:\Program Files\MiKTeX 2.9\tex\latex\graphics\graphicx.sty"
@@ -57,7 +63,7 @@ Package: infwarerr 2010/04/08 v1.3 Providing info/warning/error messages (HO)
 ("C:\Program Files\MiKTeX 2.9\tex\generic\oberdiek\ltxcmds.sty"
 Package: ltxcmds 2011/11/09 v1.22 LaTeX kernel commands for general use (HO)
 )
-\Gread@gobject=\count87
+\Gread@gobject=\count90
 ))
 \Gin@req@height=\dimen103
 \Gin@req@width=\dimen104
@@ -82,7 +88,7 @@ Package caption3 Info: TeX engine: e-TeX on input line 57.
 \caption@parindent=\dimen110
 \caption@hangindent=\dimen111
 )
-\c@ContinuedFloat=\count88
+\c@ContinuedFloat=\count91
 )
 (C:\Users\Laura\Documents\Courses\Thesis\git\paper\main.aux
 (C:\Users\Laura\Documents\Courses\Thesis\git\paper\cover.aux)
@@ -103,129 +109,151 @@ LaTeX Font Info:    ... okay on input line 11.
 
 ("C:\Program Files\MiKTeX 2.9\tex\context\base\supp-pdf.mkii"
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count89
+\scratchcounter=\count92
 \scratchdimen=\dimen112
 \scratchbox=\box26
-\nofMPsegments=\count90
-\nofMParguments=\count91
+\nofMPsegments=\count93
+\nofMParguments=\count94
 \everyMPshowfont=\toks17
-\MPscratchCnt=\count92
+\MPscratchCnt=\count95
 \MPscratchDim=\dimen113
-\MPnumerator=\count93
-\makeMPintoPDFobject=\count94
+\MPnumerator=\count96
+\makeMPintoPDFobject=\count97
 \everyMPtoPDFconversion=\toks18
 )
 Package caption Info: Begin \AtBeginDocument code.
 Package caption Info: End \AtBeginDocument code.
  (C:\Users\Laura\Documents\Courses\Thesis\git\paper\cover.tex
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <12> on input line 4.
+(Font)              <7> on input line 4.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <8> on input line 4.
-LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <6> on input line 4.
+(Font)              <5> on input line 4.
  [1
+
 
 
 {C:/ProgramData/MiKTeX/2.9/pdftex/config/pdftex.map}]) [2]
 (C:\Users\Laura\Documents\Courses\Thesis\git\paper\contents.tex
-(C:\Users\Laura\Documents\Courses\Thesis\git\paper\main.toc
-LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <7> on input line 2.
-LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <5> on input line 2.
-)
+(C:\Users\Laura\Documents\Courses\Thesis\git\paper\main.toc)
 \tf@toc=\write3
 ) [3
 
 
-]
-(C:\Users\Laura\Documents\Courses\Thesis\git\paper\intro.tex) [4
-
 
 ]
-<planar-vanishing-point-forged.png, id=19, 508.14844pt x 375.65344pt>
+(C:\Users\Laura\Documents\Courses\Thesis\git\paper\intro.tex
+Chapter 1.
+
+LaTeX Warning: Citation `rocha2011' on page 4 undefined on input line 8.
+
+) [4
+
+
+
+]
+Chapter 2.
+<planar-vanishing-point-forged.png, id=20, 508.14844pt x 375.65344pt>
 File: planar-vanishing-point-forged.png Graphic file (type png)
 
 <use planar-vanishing-point-forged.png>
 Package pdftex.def Info: planar-vanishing-point-forged.png used on input line 2
-9.
+4.
 (pdftex.def)             Requested size: 276.00105pt x 204.04208pt.
 
-<planar-midpoint-genuine.png, id=21, 950.04938pt x 447.17062pt>
+<planar-midpoint-genuine.png, id=22, 950.04938pt x 447.17062pt>
 File: planar-midpoint-genuine.png Graphic file (type png)
 
 <use planar-midpoint-genuine.png>
-Package pdftex.def Info: planar-midpoint-genuine.png used on input line 36.
+Package pdftex.def Info: planar-midpoint-genuine.png used on input line 31.
 (pdftex.def)             Requested size: 276.00105pt x 129.90814pt.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <9> on input line 37.
+(Font)              <9> on input line 32.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <6> on input line 32.
 
-<center-of-projection-planar-genuine.png, id=22, 1213.53375pt x 561.59813pt>
+<center-of-projection-planar-genuine.png, id=23, 1213.53375pt x 561.59813pt>
 File: center-of-projection-planar-genuine.png Graphic file (type png)
 
 <use center-of-projection-planar-genuine.png>
 Package pdftex.def Info: center-of-projection-planar-genuine.png used on input 
-line 43.
+line 38.
 (pdftex.def)             Requested size: 276.00105pt x 127.7252pt.
  [5
 
- <C:/Users/Laura/Documents/Courses/Thesis/git/paper/planar-vanishing-point-forg
-ed.png>] [6 <C:/Users/Laura/Documents/Courses/Thesis/git/paper/planar-midpoint-
-genuine.png> <C:/Users/Laura/Documents/Courses/Thesis/git/paper/center-of-proje
-ction-planar-genuine.png>]
-<normal-reflection.png, id=35, 540.51938pt x 438.13687pt>
+
+] [6 <C:/Users/Laura/Documents/Courses/Thesis/git/paper/planar-vanishing-point-
+forged.png> <C:/Users/Laura/Documents/Courses/Thesis/git/paper/planar-midpoint-
+genuine.png>] [7 <C:/Users/Laura/Documents/Courses/Thesis/git/paper/center-of-p
+rojection-planar-genuine.png>]
+Chapter 3.
+<normal-reflection.png, id=41, 540.51938pt x 438.13687pt>
 File: normal-reflection.png Graphic file (type png)
 
 <use normal-reflection.png>
-Package pdftex.def Info: normal-reflection.png used on input line 69.
+Package pdftex.def Info: normal-reflection.png used on input line 65.
 (pdftex.def)             Requested size: 207.0021pt x 167.79071pt.
- [7]
-<colinear-radius.png, id=41, 268.202pt x 220.825pt>
+ [8
+
+]
+<colinear-radius.png, id=45, 268.202pt x 220.825pt>
 File: colinear-radius.png Graphic file (type png)
  <use colinear-radius.png>
-Package pdftex.def Info: colinear-radius.png used on input line 82.
+Package pdftex.def Info: colinear-radius.png used on input line 78.
 (pdftex.def)             Requested size: 207.0021pt x 170.44347pt.
 
-<colinear-radius-camera-view.png, id=42, 254.551pt x 196.735pt>
+<colinear-radius-camera-view.png, id=46, 254.551pt x 196.735pt>
 File: colinear-radius-camera-view.png Graphic file (type png)
 
 <use colinear-radius-camera-view.png>
-Package pdftex.def Info: colinear-radius-camera-view.png used on input line 89.
+Package pdftex.def Info: colinear-radius-camera-view.png used on input line 85.
 
 (pdftex.def)             Requested size: 207.0021pt x 159.98787pt.
- [8 <C:/Users/Laura/Documents/Courses/Thesis/git/paper/normal-reflection.png>] 
-[9 <C:/Users/Laura/Documents/Courses/Thesis/git/paper/colinear-radius.png> <C:/
-Users/Laura/Documents/Courses/Thesis/git/paper/colinear-radius-camera-view.png>
-] [10]
-(C:\Users\Laura\Documents\Courses\Thesis\git\paper\main.bbl) [11
+ [9 <C:/Users/Laura/Documents/Courses/Thesis/git/paper/normal-reflection.png>] 
+[10 <C:/Users/Laura/Documents/Courses/Thesis/git/paper/colinear-radius.png> <C:
+/Users/Laura/Documents/Courses/Thesis/git/paper/colinear-radius-camera-view.png
+>] [11]
+Chapter 4.
+[12
+
+]
+Chapter 5.
+[13
+
+] [14
+
+
+] (C:\Users\Laura\Documents\Courses\Thesis\git\paper\main.bbl) [15
 
 ]
 (C:\Users\Laura\Documents\Courses\Thesis\git\paper\main.aux
 (C:\Users\Laura\Documents\Courses\Thesis\git\paper\cover.aux)
 (C:\Users\Laura\Documents\Courses\Thesis\git\paper\contents.aux)
-(C:\Users\Laura\Documents\Courses\Thesis\git\paper\intro.aux)) ) 
+(C:\Users\Laura\Documents\Courses\Thesis\git\paper\intro.aux))
+
+LaTeX Warning: There were undefined references.
+
+ ) 
 Here is how much of TeX's memory you used:
- 2286 strings out of 493921
- 36950 string characters out of 3147282
- 95089 words of memory out of 3000000
- 5574 multiletter control sequences out of 15000+200000
- 9461 words of font info for 33 fonts, out of 3000000 for 9000
+ 2463 strings out of 493921
+ 38906 string characters out of 3147282
+ 97561 words of memory out of 3000000
+ 5753 multiletter control sequences out of 15000+200000
+ 8025 words of font info for 28 fonts, out of 3000000 for 9000
  841 hyphenation exceptions out of 8191
- 36i,6n,38p,1152b,348s stack positions out of 5000i,500n,10000p,200000b,50000s
-<C:/Program Fil
-es/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmbx10.pfb><C:/Program Files/MiKTe
-X 2.9/fonts/type1/public/amsfonts/cm/cmbx12.pfb><C:/Program Files/MiKTeX 2.9/fo
-nts/type1/public/amsfonts/cm/cmbx9.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1
-/public/amsfonts/cm/cmmi10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/
-amsfonts/cm/cmmi9.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/
-cm/cmr10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr12.
-pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr17.pfb><C:/P
-rogram Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr9.pfb><C:/Program Fil
-es/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmti10.pfb>
-Output written on main.pdf (11 pages, 2750434 bytes).
+ 36i,6n,38p,1152b,380s stack positions out of 5000i,500n,10000p,200000b,50000s
+<C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmbx10.pfb><C:/Pr
+ogram Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmbx9.pfb><C:/Program Fil
+es/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Program Files/MiKTe
+X 2.9/fonts/type1/public/amsfonts/cm/cmmi9.pfb><C:/Program Files/MiKTeX 2.9/fon
+ts/type1/public/amsfonts/cm/cmr10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/
+public/amsfonts/cm/cmr12.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/am
+sfonts/cm/cmr17.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm
+/cmr9.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsl10.pf
+b><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsl12.pfb><C:/Pr
+ogram Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmti10.pfb>
+Output written on main.pdf (15 pages, 2768461 bytes).
 PDF statistics:
- 91 PDF objects out of 1000 (max. 8388607)
+ 108 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
  31 words of extra memory for PDF output out of 10000 (max. 10000000)
 
