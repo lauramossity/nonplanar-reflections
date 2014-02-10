@@ -1,13 +1,30 @@
 \begin{thebibliography}{}
 
+\bibitem[Farid and Bravo, 2010]{farid2010image}
+Farid, H. and Bravo, M.~J. (2010).
+\newblock Image forensic analyses that elude the human visual system.
+\newblock In {\em IS\&T/SPIE Electronic Imaging}, pages 754106--754106.
+  International Society for Optics and Photonics.
+
 \bibitem[Hartley and Zisserman, 2004]{hartley}
 Hartley, R. and Zisserman, A. (2004).
 \newblock {\em Multiple View Geometry in Computer Vision}.
 \newblock Cambridge University Press, 2nd edition.
 
+\bibitem[Kee et~al., 2013]{kee2013exposing}
+Kee, E., O'brien, J., and Farid, H. (2013).
+\newblock Exposing photo manipulation with inconsistent shadows.
+\newblock {\em ACM Transactions on Graphics (TOG)}, 32(3):28.
+
 \bibitem[O'Brien and Farid, 2012]{obrien12}
 O'Brien, J.~F. and Farid, H. (2012).
 \newblock Exposing photo manipulation with inconsistent reflections.
 \newblock {\em ACM Transactions on Graphics}, 31(1).
+
+\bibitem[Rocha et~al., 2011]{rocha2011}
+Rocha, A., Scheirer, W., Boult, T., and Goldenstein, S. (2011).
+\newblock Vision of the unseen: Current trends and challenges in digital image
+  and video forensics.
+\newblock {\em ACM Computing Surveys}, 43(4).
 
 \end{thebibliography}

@@ -1,12 +1,15 @@
 \documentclass{thesis}
 %\usepackage{lgrind}
 \usepackage{graphicx}
+\usepackage{caption}
+\usepackage{subcaption}
 \usepackage{verbatim}
 
 \usepackage[font=small,labelfont=bf]{caption}
 
 \pagestyle{plain}
 \bibliographystyle{apalike}
+\renewcommand{\bibname}{References}
 
 \begin{document}
 
@@ -19,6 +22,7 @@
 
 \chapter{Prior Work}
 \section{Reflections on Planar Surfaces}
+\label{sec:planar-reflections}
 \begin{figure}
 	\centering
     	\includegraphics[width=0.8\textwidth]{planar-vanishing-point-forged}
@@ -47,8 +51,19 @@ The first step to all of the techniques is obtaining lines in the image that are
 If a forger wanted to manipulate an image that contains a reflective surface, they would likely be trying to create a composite of images. For example, if they were trying to place a person in the scene that was never actually there, they would paste in that person and their reflection from another image. It may be relatively simple to align and resize these components so that they look convincing in the new image, but the reflection may still retain some properties of the mirror in the image it came from.
 
 
-\section{Other Related Work}
-% TODO Shadows
+\section{Other Geometric Techniques}
+Other forensic techniques exist that take a geometric approach to shadow consistency. Instead of determining if there is a consistent vanishing point, or a plausible consistent camera location, these techniques determine if there is a consistent location for a light source. One simple technique for determining shadow consistency, akin to the techniques for reflection consistency, involve drawing rays between points on an object and corresponding points on the shadow. These rays should intersect in a plausible location for the light source (or they should be nearly parallel if the light source is the sun) \cite{farid2010image}. This is dependent on the shadows having easily distinguishable features that can be matched up to the object that is casting the shadow.
+
+\begin{figure}
+	\centering
+    	\includegraphics[width=0.8\textwidth]{moon-landing-consistent}
+	\caption{Based on shadow wedge constraints, this photo of the moon landing has a consistent light source. Original image copyright 1969, NASA. \cite[Fig.~1]{kee2013exposing}}
+	\label{moon-landing-consistent}
+\end{figure}
+
+Another similar technique improves on the previous one by eliminating the need for distinguishable shadow features. Instead of drawing rays, a point is picked on a shadow and a wedge constraint created that contains all of the object that could have plausibly cast that point of the shadow \cite{kee2013exposing}. If there exists a region that satisfies all the constraints, the image passes this test, as in Figure~\ref{moon-landing-consistent}.
+
+% TODO section describing approach? including assumptions and why they are reasonable, overview of tools
 
 \chapter{Mathematical Techniques}
 \section{Assumptions}
@@ -58,6 +73,7 @@ We also assume the camera used to take any of the images analyzed is a point cam
 An important idea to note is that showing that an image is consistent according to these techniques is not sufficient to prove that the image is genuine, because the image could have had some counter-forensic techniques applied or been manipulated in a way that is unrelated to reflective geometry.
 
 \section{Properties of Reflective Geometry}
+% TODO expand to sync up nomenclature
 Reflection of light on a surface is directly related to the surface normal at the point of reflection. The incident ray (or ray of light coming towards the surface) must make the same angle with the normal as the reflected ray.  Additionally, the incident ray, reflected ray, and normal must all be coplanar, and the reflected and incident rays must be on opposite sides of the normal.
 
 \begin{figure}
@@ -69,7 +85,7 @@ Reflection of light on a surface is directly related to the surface normal at th
 
 O'Brien and Farid point out that a non-obvious consequence of this law is that if a ray is drawn between the reflected object and its reflection, it should appear to be parallel to the surface normal at the point of reflection. (In the planar case, it would appear perpendicular to the mirror, since the normal is constant over the whole surface.) We will call this the projection of the incident ray. Furthermore, the incident ray and the ray drawn between the reflected object and its reflection's apparent location are co-linear from the perspective of a point camera, as demonstrated in Figure~\ref{normal-reflection}. This is why drawing rays on a picture between an object and its reflection works: it appears equivalent to drawing rays to the apparent position of the reflected object.
 
-In the case of a planar mirror, all of these rays would be parallel in three-dimensional space.\nocite{obrien12} An axiom of linear perspective projection is that parallel lines projected onto a 2D image must converge to some vanishing point $V$ \cite[p.~2]{hartley}, so all such lines through a planar mirror intersect at a single vanishing point if the photograph is unaltered.
+In the case of a planar mirror, all of these rays would be parallel in three-dimensional space.\nocite{obrien12} An axiom of linear perspective projection is that parallel lines projected onto a 2D image must converge to some vanishing point $V$ \cite[p.~2]{hartley}, so all such lines through a planar mirror intersect at a single vanishing point if the photograph is unaltered. This is the mathematical basis for the technique described in Section~\ref{sec:planar-reflections}.
 
 
 \section{Reflective Sphere Geometry}
@@ -83,7 +99,7 @@ In the case of a planar mirror, all of these rays would be parallel in three-dim
 \begin{figure}
 	\centering
     	\includegraphics[width=0.6\textwidth]{colinear-radius-camera-view}
-	\caption{A view of Figure~\ref{colinear-radius} from the point of view of the camera $C$.}
+	\caption{A view of Figure~\ref{colinear-radius} from the viewpoint of the camera $C$.}
 	\label{colinear-radius-camera-view}
 \end{figure}
 
@@ -91,12 +107,13 @@ In the case of a curved surface, the ray to the apparent position of the reflect
 
 If the curved surface happens to be spherical we can exploit the fact that the normal at any point on the surface is colinear with some radius of the sphere. This is because any normal on a sphere points directly away from the center of the sphere. Since the incident ray, reflected ray, and normal are all coplanar, and the normal and the radius are coplanar, then the incident ray and any radius in that cross-section of the sphere are coplanar [Figure~\ref{colinear-radius}].
 
-From the perspective of the camera, since the projection of the incident ray is colinear with the normal, it must also be colinear with the radius. Therefore, in theory, in a valid picture of a reflective sphere any incident ray must appear to pass through the center of the sphere [Figure~\ref{colinear-radius-camera-view}].
+From the view point of the camera, since the projection of the incident ray is colinear with the normal, it must also be colinear with the radius. Therefore, in theory, in a valid picture of a reflective sphere any incident ray must appear to pass through the center of the sphere [Figure~\ref{colinear-radius-camera-view}].
 
 \section{Why not estimate the normal?}
+% TODO explain that camera parameters are needed
 In general, the types of techniques outlined verify that the incident ray is consistent with the normal at the point of reflection. If the projection of the normal could be estimated on any arbitrary image of a quadric surface, then we could easily have a technique to detect inconsistencies in reflections on most curved surfaces because the projection of the normal and the projection of the incident ray should be colinear. However, when perspective projection is taken into account, it is non-trivial to estimate the normal accurately on an arbitrary visible point on the surface, even for a simple surface like a sphere.
 
-In the unrealistic case where an image was produced using orthographic projection, the projection of the normal could be easily estimated on a sphere because the sphere appears exactly the same no matter the angle from which it is viewed, and the entire hemisphere facing the camera is visible. The $x$ and $y$ components of the projection of the normal vector are simply a function of the projection of the position on the sphere. With perspective projection, the visible region of the sphere is slightly smaller than the projection of the hemisphere so the radius can not be determined just from the visible size of the sphere.
+In the unrealistic case where an image was produced using orthographic projection, the projection of the normal could be easily estimated on a sphere because the sphere appears exactly the same no matter the angle from which it is viewed, and the entire hemisphere facing the camera is visible. The $x$ and $y$ components of the projection of the normal vector are simply a function of the projection of the position on the sphere. With perspective projection, the visible region of the sphere is slightly smaller than the projection of the hemisphere so the radius can not be determined from the visible size of the sphere alone.
 
 \chapter{Implementation}
 In order to expedite the process of obtaining images that meet a variety of very specific conditions, all images used to test these algorithms were computer-generated using Blender 2.68a.
@@ -109,24 +126,44 @@ To find the center of the sphere, the user picks several points (at least 3, dep
 Because accuracy in finding the sphere center is key to this analysis, the application employs some rudimentary edge detection to assist in picking points on the edge of the sphere. Based on an initial point picked, it examines several pixels towards and away from an initial guess for the center and moves the point halfway between the pixels with the greatest difference in color. This edge detection is fairly limited, but is good enough for the purpose of the test images used because of their plain and easily distinguishable colors.
 
 \subsection{Distortion from Perspective Projection}
-One issue with this naive approach to finding the center is that perspective projection distorts the shape of the sphere, depending on how centered the sphere is in the camera's view. If the sphere is towards the edge of the camera's view, the extent of the visible part of the sphere towards the edge is closer to the camera than the visible extent of the part of the sphere towards the middle of the image. This causes the sphere to look larger towards the edge of the image and therefore the apparent edge of the circle distorts out towards the edge of the image.
+\label{sec:perspective-distortion}
+\begin{figure}
+	\centering
+	\begin{subfigure}[b]{0.4\textwidth}
+                \includegraphics[width=\textwidth]{sphere-perspective-zoom}
+                \caption{Perspective view of a sphere}
+    \end{subfigure}
+    ~
+   	\begin{subfigure}[b]{0.4\textwidth}
+                \includegraphics[width=\textwidth]{sphere-ortho}
+                \caption{Orthographic view of a sphere}
+    \end{subfigure}
+    \caption{Viewing the sphere with perspective projection introduces noticeable error when solving for the circle projected onto the image plane.}
+	\label{sphere-perspective-ortho}
+\end{figure}
 
-% TODO IRL example of this phenomenon
+One issue with this naive approach to finding the center is that perspective projection distorts the shape of the sphere, depending on how centered the sphere is in the camera's view. If the sphere is towards the edge of the camera's view, the extent of the visible part of the sphere towards the edge is closer to the camera than the visible extent of the part of the sphere towards the middle of the image. This causes the sphere to look larger towards the edge of the image and therefore the apparent edge of the circle distorts out towards the edge of the image. As a result, the outline projected onto the image is slightly elliptical, as in Figure~\ref{sphere-perspective-ortho}.
+
+% TODO IRL example of this phenomenon?
 % TODO example with smaller sphere
-% TODO example with orthographic projection
 % TODO diagram
 
 
 
-\chapter{Conclusion}
-\section{Results}
-% explain the need to plot the center point
-% why it's not useful to consider the intersection of points, but rather how close they come to the circle center
+\chapter{Results}
+As detailed in Section~\ref{sec:perspective-distortion}, it as not as simple as finding the outline of a perfect circle to find the projection of the center of the sphere in the image. Therefore, for the purpose of testing the method, test images were generated with a small sphere located at the exact center of the reflective sphere made slightly transparent.
+
+Because there is some error associated with having a human input the points to create the projections of the incident rays, it is assumed that in an unaltered image the rays will probably not cross the exact center of the sphere. For this reason, the measure for authenticity will be how close the rays come to the center of the sphere.
+
+One possible alternative to looking at the minimum distance to the center would be to consider the the point of intersection of all the rays, similar to the vanishing point method in the planar case. However, the spherical case is much more sensitive to error than the planar case. In the planar case the incident rays are parallel, so their vanishing point often lies far outside the image, and so the position of the intersection point is not very sensitive to a difference of a few pixels in the points picked. In the spherical case, however, it is not uncommon for the projections of the incident rays to not intersect cleanly even in genuine images.
+
+\section{Typical Results for Genuine Images}
 % typical results for untampered images- how many pixels away from the center, how scattered the intersections can be
 % address: effects of higher resolution, edited images: shifts forward/back, side to side, farther back, composite,
 % why the radius test breaks for certain adjustments
-%\subsection{Effects of Human Error}
-\section{Future Work}
+
+
+\chapter{Future Work}
 
 \clearpage
 
