@@ -127,6 +127,14 @@ Because accuracy in finding the sphere center is key to this analysis, the appli
 
 \subsection{Distortion from Perspective Projection}
 \label{sec:perspective-distortion}
+
+\begin{figure}
+	\centering
+    	\includegraphics[width=0.6\textwidth]{sphere-distortion}
+	\caption{If the image plane is not facing the sphere head-on, the distance from the point $P_1$ to its projection $p_1$ through the center of projection $C$ is shorter than the distance from $P_2$ to $p_2$, so one side is distorted. Additonally, the projection $q$ of the sphere center $Q$ is not the midpoint of $p_1$ and $p_2$.}
+	\label{sphere-distortion}
+\end{figure}
+
 \begin{figure}
 	\centering
 	\begin{subfigure}[b]{0.4\textwidth}
@@ -142,7 +150,7 @@ Because accuracy in finding the sphere center is key to this analysis, the appli
 	\label{sphere-perspective-ortho}
 \end{figure}
 
-One issue with this naive approach to finding the center is that perspective projection distorts the shape of the sphere, depending on how centered the sphere is in the camera's view. If the sphere is towards the edge of the camera's view, the extent of the visible part of the sphere towards the edge is closer to the camera than the visible extent of the part of the sphere towards the middle of the image. This causes the sphere to look larger towards the edge of the image and therefore the apparent edge of the circle distorts out towards the edge of the image. As a result, the outline projected onto the image is slightly elliptical, as in Figure~\ref{sphere-perspective-ortho}.
+One issue with this naive approach to finding the center is that perspective projection distorts the shape of the sphere, depending on how centered the sphere is in the camera's view. If the sphere is towards the edge of the camera's view, the extent of the visible part of the sphere towards the edge is closer to the camera than the visible extent of the part of the sphere towards the middle of the image. This causes the sphere to look larger towards the edge of the image and therefore the apparent edge of the circle distorts out towards the edge of the image. This effect is described in Figure~\ref{sphere-distortion}. As a result, the outline projected onto the image is slightly elliptical, as in Figure~\ref{sphere-perspective-ortho}.
 
 % TODO IRL example of this phenomenon?
 % TODO example with smaller sphere
@@ -151,15 +159,37 @@ One issue with this naive approach to finding the center is that perspective pro
 
 
 \chapter{Results}
-As detailed in Section~\ref{sec:perspective-distortion}, it as not as simple as finding the outline of a perfect circle to find the projection of the center of the sphere in the image. Therefore, for the purpose of testing the method, test images were generated with a small sphere located at the exact center of the reflective sphere made slightly transparent.
+\begin{figure}
+	\centering
+    	\includegraphics[width=0.8\textwidth]{center-error}
+	\caption{The center found when finding the best fit for a perfect circle (green cross) is significantly offset from the actual projected center of the sphere (pink dot).}
+	\label{center-error}
+\end{figure}
+
+As detailed in Section~\ref{sec:perspective-distortion}, it as not as simple as finding the outline of a perfect circle to find the projection of the center of the sphere in the image. Therefore, for the purpose of testing the method, test images were generated with a small sphere located at the exact center of the reflective sphere made slightly transparent. Figure~\ref{center-error} shows how inaccurate the naive center-finding method can be.
 
 Because there is some error associated with having a human input the points to create the projections of the incident rays, it is assumed that in an unaltered image the rays will probably not cross the exact center of the sphere. For this reason, the measure for authenticity will be how close the rays come to the center of the sphere.
 
 One possible alternative to looking at the minimum distance to the center would be to consider the the point of intersection of all the rays, similar to the vanishing point method in the planar case. However, the spherical case is much more sensitive to error than the planar case. In the planar case the incident rays are parallel, so their vanishing point often lies far outside the image, and so the position of the intersection point is not very sensitive to a difference of a few pixels in the points picked. In the spherical case, however, it is not uncommon for the projections of the incident rays to not intersect cleanly even in genuine images.
 
+% TODO measurable error- residuals?
+
 \section{Typical Results for Genuine Images}
 % typical results for untampered images- how many pixels away from the center, how scattered the intersections can be
-% address: effects of higher resolution, edited images: shifts forward/back, side to side, farther back, composite,
+% effects of higher resolution
+\begin{figure}
+	\centering
+    	\includegraphics[width=0.6\textwidth]{1b-genuine}
+	\caption{The chair and the cube are reasonably consistent with the center of the sphere, but the incident rays from the letters appear to intersect at a point slightly offset from the center, despite being unmanipulated.}
+	\label{1b-genuine}
+\end{figure}
+Based on images containing relatively large and relatively small reflective spheres with objects at varying distances, the projections of the incident rays usually come within 5 pixels of the sphere center. This increases with higher resolution images. As seen in Figure~\ref{1b-genuine}, some objects seem to have a clean intersection point that is offset from the sphere center. The source of this error is unknown.
+
+
+
+\section{Effects of Forgery}
+
+% address: edited images: shifts forward/back, side to side, farther back, composite,
 % why the radius test breaks for certain adjustments
 
 

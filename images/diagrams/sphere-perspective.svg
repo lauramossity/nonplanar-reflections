@@ -15,7 +15,7 @@
    inkscape:version="0.48.4 r"
    width="939"
    height="539"
-   sodipodi:docname="sphere-perspective.PNG">
+   sodipodi:docname="sphere-perspective.svg">
   <metadata
      id="metadata3209">
     <rdf:RDF>
@@ -61,7 +61,9 @@
      inkscape:window-x="-8"
      inkscape:window-y="-8"
      inkscape:window-maximized="1"
-     inkscape:current-layer="svg3203" />
+     inkscape:current-layer="svg3203"
+     showguides="true"
+     inkscape:guide-bbox="true" />
   <image
      width="939"
      height="539"
@@ -892,17 +894,25 @@ RU5ErkJggg==
 "
      id="image3211"
      x="0"
-     y="0" />
+     y="0"
+     inkscape:export-xdpi="90"
+     inkscape:export-ydpi="90" />
   <path
      style="fill:none;stroke:#dfdfdf;stroke-width:2.5;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;stroke-miterlimit:4;stroke-dasharray:2.5,2.5;stroke-dashoffset:0"
      d="M 151.08478,489.45069 535.29498,277.44464"
      id="path4071"
-     inkscape:connector-curvature="0" />
+     inkscape:connector-curvature="0"
+     inkscape:export-filename="C:\Users\Laura\Documents\Courses\Thesis\git\images\diagrams\image3211.png"
+     inkscape:export-xdpi="90"
+     inkscape:export-ydpi="90" />
   <path
      style="fill:none;stroke:#dfdfdf;stroke-width:2.5;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;stroke-miterlimit:4;stroke-dasharray:2.5,2.5;stroke-dashoffset:0"
      d="M 150.27249,140.98097 534.4827,153.16522"
      id="path4075"
-     inkscape:connector-curvature="0" />
+     inkscape:connector-curvature="0"
+     inkscape:export-filename="C:\Users\Laura\Documents\Courses\Thesis\git\images\diagrams\image3211.png"
+     inkscape:export-xdpi="90"
+     inkscape:export-ydpi="90" />
   <image
      width="939"
      height="539"
@@ -912,29 +922,44 @@ RU5ErkJggg==
      y="0"
      clip-path="url(#clipPath3085)"
      transform="matrix(2.6932992,0,0,2.6932992,-1276.2496,-264.47758)"
-     style="stroke:none;stroke-opacity:1;stroke-width:0.99988891000000002;stroke-miterlimit:4;stroke-dasharray:none" />
+     style="stroke:none;stroke-opacity:1;stroke-width:0.99988891000000002;stroke-miterlimit:4;stroke-dasharray:none"
+     inkscape:export-filename="C:\Users\Laura\Documents\Courses\Thesis\git\images\diagrams\image3211.png"
+     inkscape:export-xdpi="90"
+     inkscape:export-ydpi="90" />
   <rect
      style="fill:none;fill-opacity:1;fill-rule:evenodd;stroke:#dfdfdf;stroke-opacity:1;stroke-width:4;stroke-miterlimit:4;stroke-dasharray:none"
      id="rect4005"
      width="219.3166"
      height="349.28201"
      x="150.27249"
-     y="140.16869" />
+     y="140.16869"
+     inkscape:export-filename="C:\Users\Laura\Documents\Courses\Thesis\git\images\diagrams\image3211.png"
+     inkscape:export-xdpi="90"
+     inkscape:export-ydpi="90" />
   <rect
      style="fill:none;stroke:#dfdfdf;stroke-width:2.5;stroke-opacity:1;stroke-miterlimit:4;stroke-dasharray:none"
      id="rect4005-7"
      width="75.379166"
      height="125.15435"
      x="534.97046"
-     y="152.0284" />
+     y="152.0284"
+     inkscape:export-filename="C:\Users\Laura\Documents\Courses\Thesis\git\images\diagrams\image3211.png"
+     inkscape:export-xdpi="90"
+     inkscape:export-ydpi="90" />
   <path
      style="fill:none;stroke:#dfdfdf;stroke-width:2.5;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;stroke-miterlimit:4;stroke-dasharray:2.5,2.5;stroke-dashoffset:0"
      d="M 368.77682,489.45069 609.2128,277.44464"
      id="path4049"
-     inkscape:connector-curvature="0" />
+     inkscape:connector-curvature="0"
+     inkscape:export-filename="C:\Users\Laura\Documents\Courses\Thesis\git\images\diagrams\image3211.png"
+     inkscape:export-xdpi="90"
+     inkscape:export-ydpi="90" />
   <path
      style="fill:none;stroke:#dfdfdf;stroke-width:2.5;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;stroke-miterlimit:4;stroke-dasharray:2.5,2.5;stroke-dashoffset:0"
      d="M 368.77682,140.98097 609.2128,152.35294"
      id="path4073"
-     inkscape:connector-curvature="0" />
+     inkscape:connector-curvature="0"
+     inkscape:export-filename="C:\Users\Laura\Documents\Courses\Thesis\git\images\diagrams\image3211.png"
+     inkscape:export-xdpi="90"
+     inkscape:export-ydpi="90" />
 </svg>

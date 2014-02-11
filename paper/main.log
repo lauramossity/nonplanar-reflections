@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.4-1.40.13 (MiKTeX 2.9 64-bit) (preloaded format=pdflatex 2013.12.2)  9 FEB 2014 19:29
+This is pdfTeX, Version 3.1415926-2.4-1.40.13 (MiKTeX 2.9 64-bit) (preloaded format=pdflatex 2013.12.2)  10 FEB 2014 15:55
 entering extended mode
 **main.tex
 (C:\Users\Laura\Documents\Courses\Thesis\git\paper\main.tex
@@ -223,35 +223,55 @@ Package pdftex.def Info: colinear-radius-camera-view.png used on input line 101
 :/Users/Laura/Documents/Courses/Thesis/git/paper/colinear-radius-camera-view.pn
 g>] [12]
 Chapter 4.
-<sphere-perspective-zoom.png, id=62, 754.017pt x 432.817pt>
+<sphere-distortion.png, id=62, 478.588pt x 250.536pt>
+File: sphere-distortion.png Graphic file (type png)
+
+<use sphere-distortion.png>
+Package pdftex.def Info: sphere-distortion.png used on input line 133.
+(pdftex.def)             Requested size: 207.0021pt x 108.36296pt.
+
+<sphere-perspective-zoom.png, id=63, 754.017pt x 432.817pt>
 File: sphere-perspective-zoom.png Graphic file (type png)
 
 <use sphere-perspective-zoom.png>
-Package pdftex.def Info: sphere-perspective-zoom.png used on input line 133.
+Package pdftex.def Info: sphere-perspective-zoom.png used on input line 141.
 (pdftex.def)             Requested size: 137.9979pt x 79.21133pt.
 
-<sphere-ortho.png, id=63, 705.38531pt x 404.26031pt>
+<sphere-ortho.png, id=64, 705.38531pt x 404.26031pt>
 File: sphere-ortho.png Graphic file (type png)
  <use sphere-ortho.png>
-Package pdftex.def Info: sphere-ortho.png used on input line 138.
+Package pdftex.def Info: sphere-ortho.png used on input line 146.
 (pdftex.def)             Requested size: 137.9979pt x 79.08643pt.
 
 [13
 
+] [14 <C:/Users/Laura/Documents/Courses/Thesis/git/paper/sphere-distortion.png>
  <C:/Users/Laura/Documents/Courses/Thesis/git/paper/sphere-perspective-zoom.png
 > <C:/Users/Laura/Documents/Courses/Thesis/git/paper/sphere-ortho.png>]
-[14]
 Chapter 5.
+<center-error.png, id=76, 1482.53876pt x 837.1275pt>
+File: center-error.png Graphic file (type png)
+ <use center-error.png>
+Package pdftex.def Info: center-error.png used on input line 164.
+(pdftex.def)             Requested size: 276.00105pt x 155.83694pt.
+
+<1b-genuine.png, id=77, 1051.67906pt x 588.69937pt>
+File: 1b-genuine.png Graphic file (type png)
+ <use 1b-genuine.png>
+Package pdftex.def Info: 1b-genuine.png used on input line 182.
+(pdftex.def)             Requested size: 207.0021pt x 115.86935pt.
+
 [15
 
-]
+] [16 <C:/Users/Laura/Documents/Courses/Thesis/git/paper/center-error.png> <C:/
+Users/Laura/Documents/Courses/Thesis/git/paper/1b-genuine.png>]
 Chapter 6.
-[16
+[17
 
-] [17
+] [18
 
 
-] (C:\Users\Laura\Documents\Courses\Thesis\git\paper\main.bbl) [18
+] (C:\Users\Laura\Documents\Courses\Thesis\git\paper\main.bbl) [19
 
 ]
 (C:\Users\Laura\Documents\Courses\Thesis\git\paper\main.aux
@@ -259,10 +279,10 @@ Chapter 6.
 (C:\Users\Laura\Documents\Courses\Thesis\git\paper\contents.aux)
 (C:\Users\Laura\Documents\Courses\Thesis\git\paper\intro.aux)) ) 
 Here is how much of TeX's memory you used:
- 2536 strings out of 493921
- 40300 string characters out of 3147282
+ 2554 strings out of 493921
+ 40657 string characters out of 3147282
  97734 words of memory out of 3000000
- 5822 multiletter control sequences out of 15000+200000
+ 5837 multiletter control sequences out of 15000+200000
  7717 words of font info for 27 fonts, out of 3000000 for 9000
  841 hyphenation exceptions out of 8191
  36i,7n,38p,1152b,451s stack positions out of 5000i,500n,10000p,200000b,50000s
@@ -272,13 +292,14 @@ es/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmbx9.pfb><C:/Program Files/MiKTeX
 ts/type1/public/amsfonts/cm/cmmi9.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/
 public/amsfonts/cm/cmr10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/am
 sfonts/cm/cmr12.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm
-/cmr17.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr9.pfb
-><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsl10.pfb><C:/Pro
-gram Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsl12.pfb><C:/Program Fil
-es/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmti10.pfb>
-Output written on main.pdf (18 pages, 3542090 bytes).
+/cmr17.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr6.pfb
+><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr9.pfb><C:/Progr
+am Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsl10.pfb><C:/Program Files
+/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsl12.pfb><C:/Program Files/MiKTeX 
+2.9/fonts/type1/public/amsfonts/cm/cmti10.pfb>
+Output written on main.pdf (19 pages, 3749950 bytes).
 PDF statistics:
- 118 PDF objects out of 1000 (max. 8388607)
+ 131 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
- 46 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 61 words of extra memory for PDF output out of 10000 (max. 10000000)
 
