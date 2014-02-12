@@ -146,7 +146,7 @@ class AbstractAnalysis:
         self.lineCollections[self.openCollectionIdx].undoLine()
 
     @abstractmethod
-    def analyze(self):
+    def analyze(self, plainTextEdit):
         pass
 
 
@@ -214,7 +214,7 @@ class PlanarAnalysis(AbstractAnalysis):
         print minidx
         return minidx
 
-    def analyze(self):
+    def analyze(self, plainTextEdit):
         raise NotImplementedError
 
 
@@ -296,7 +296,7 @@ class SphericalAnalysis(AbstractAnalysis):
                 diff = i * slopeVector
                 newPointCandidates.append(point + QtCore.QPoint(round(diff.x()), round(diff.y())))
 
-            print newPointCandidates
+            #print newPointCandidates
 
             # Take the difference between each point and the next point
             absdiff = []
@@ -305,16 +305,12 @@ class SphericalAnalysis(AbstractAnalysis):
 
             # replace the old point with the spot in between the two pixels with the max difference
             maxdiff, idx = max( (v, i) for i, v in enumerate(absdiff) )
-            print "maxdiff: %f" % maxdiff
+            #print "maxdiff: %f" % maxdiff
             if maxdiff != 0:
                 newPoints.append((newPointCandidates[idx] + newPointCandidates[idx+1]) / 2)
             else:
                 newPoints.append(QtCore.QPointF(point))
             
-            '''
-            region = image.copy(point.x() - 10, point.y() - 10, 21, 21)
-            matRegion = convertQImageToMat(region)
-            '''
 
         self.circlePoints = newPoints
         h, k, r = self.solveCircle(newPoints)
@@ -332,15 +328,16 @@ class SphericalAnalysis(AbstractAnalysis):
 
         #Redo circle solution with new points
 
-    def analyze(self):
+    def analyze(self, plainTextEdit):
+        plainTextEdit.setPlainText("")
         # For each line group, figure out if each line goes through the center of the circle or close to it.
         i = 1
         for lc in self.lineCollections:
-            print "Line Collection %s" % i
+            plainTextEdit.appendPlainText("Line Collection %s" % i)
             i += 1
-            print "Minimum distances from each line to the center:"
+            plainTextEdit.appendPlainText("Minimum distances from each line to the center:")
             for line in lc.lines:
-                print minDistance(self.center, line)
+                plainTextEdit.appendPlainText("%s" % minDistance(self.center, line))
 
             if len(lc.intersections) > 2:
                 intersectionPointsAsTuples = [p.toTuple() for p in lc.intersections]
@@ -348,8 +345,8 @@ class SphericalAnalysis(AbstractAnalysis):
                 stdDev = QtCore.QPointF(*np.std(intersectionPointsAsTuples, axis=0))
 
                 pointsWithinStdDev = [p for p in lc.intersections if np.linalg.norm((p-mean).toTuple()) <= np.linalg.norm(stdDev.toTuple())]
-                print len(pointsWithinStdDev), "out of", len(lc.intersections), "intersections within 1 standard deviation of the mean"
+                plainTextEdit.appendPlainText("%d out of %d intersections within 1 standard deviation of the mean" % (len(pointsWithinStdDev), len(lc.intersections)))
 
                 clusterCenter = np.mean(pointsWithinStdDev, axis=0)
-                print "Cluster is at", clusterCenter.toTuple(), ", which is ", (clusterCenter-self.center).toTuple(), "px away from the circle center"
+                plainTextEdit.appendPlainText("Cluster is at %s, which is %s px away from the circle center" % (clusterCenter.toTuple(), (clusterCenter-self.center).toTuple()))
 

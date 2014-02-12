@@ -105,8 +105,9 @@ class Canvas(QtGui.QWidget):
     def startNewLineGroup(self):
         self.analysisObject.startNewLineCollection()
 
-    def analyze(self):
-        self.analysisObject.analyze()
+    # Modifies plainTextEdit
+    def analyze(self, plainTextEdit):
+        self.analysisObject.analyze(plainTextEdit)
 
     def changeZoom(self, change):
         self.zoom += change
@@ -116,6 +117,11 @@ class Canvas(QtGui.QWidget):
     def clearCurrentPoints(self):
         self._points = []
         self.update()
+
+    def reset(self):
+        self.clearCurrentPoints()
+        self.resetMetadata()
+        self.setAnalysisMode(self._analysisMode)
 
     def undoLine(self):
         self.analysisObject.undoLine()
@@ -129,6 +135,9 @@ class MainWindow(QtGui.QMainWindow):
         self.scrollarea = QtGui.QScrollArea()
         self.scrollarea.setWidget(self.canvas)
         self.setCentralWidget(self.scrollarea)
+
+        self.plainTextEdit = QtGui.QPlainTextEdit()
+        self.plainTextEdit.setReadOnly(True)
 
         self.createActions()
         self.createMenus()
@@ -159,6 +168,13 @@ class MainWindow(QtGui.QMainWindow):
     def changeZoom(self, change):
         self.canvas.changeZoom(change)
 
+    def analyze(self):
+        self.canvas.analyze(self.plainTextEdit)
+        self.plainTextEdit.show()
+        self.plainTextEdit.activateWindow()
+        self.plainTextEdit.setFocus()
+        self.plainTextEdit.selectAll()
+
     def createActions(self):
         self.openAct = QtGui.QAction("&Open...", self, shortcut="Ctrl+O",
                 triggered=self.open)
@@ -175,12 +191,13 @@ class MainWindow(QtGui.QMainWindow):
 
         self.newLineGroupAct = QtGui.QAction("New Line Group", self, toolTip="Start a new group of lines. Use this when starting to analyze another object in the scene.", triggered=self.canvas.startNewLineGroup)
 
-        self.analyzeAct = QtGui.QAction("Analyze", self, toolTip="Perform an analysis based on the current information.", triggered=self.canvas.analyze)
+        self.analyzeAct = QtGui.QAction("Analyze", self, toolTip="Perform an analysis based on the current information.", triggered=self.analyze)
 
         self.zoomInAct = QtGui.QAction("+", self, toolTip="Zoom in", triggered=partial(self.changeZoom, .02))
         self.zoomOutAct = QtGui.QAction("-", self, toolTip="Zoom out", triggered=partial(self.changeZoom, -.02))
 
         self.clearCurrentPointsAct = QtGui.QAction("Clear", self, toolTip="Clear the current set of points that are not yet formed into a shape", triggered=self.canvas.clearCurrentPoints, shortcut='C')
+        self.resetAct = QtGui.QAction("Reset", self, toolTip="Reset the analysis for the opened image.", triggered=self.canvas.reset)
 
         self.undoLineAct = QtGui.QAction("Undo Last Line", self, toolTip="Remove the last line created", triggered=self.canvas.undoLine, shortcut='Ctrl+Z')
 
@@ -221,6 +238,7 @@ class MainWindow(QtGui.QMainWindow):
         toolBar.addSeparator()
 
         toolBar.addAction(self.clearCurrentPointsAct)
+        toolBar.addAction(self.resetAct)
 
 def main():
     app = QtGui.QApplication(argv)
