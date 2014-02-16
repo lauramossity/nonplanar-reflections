@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.4-1.40.13 (MiKTeX 2.9 64-bit) (preloaded format=pdflatex 2013.12.2)  10 FEB 2014 15:55
+This is pdfTeX, Version 3.1415926-2.4-1.40.13 (MiKTeX 2.9 64-bit) (preloaded format=pdflatex 2013.12.2)  16 FEB 2014 17:38
 entering extended mode
 **main.tex
 (C:\Users\Laura\Documents\Courses\Thesis\git\paper\main.tex
@@ -223,12 +223,12 @@ Package pdftex.def Info: colinear-radius-camera-view.png used on input line 101
 :/Users/Laura/Documents/Courses/Thesis/git/paper/colinear-radius-camera-view.pn
 g>] [12]
 Chapter 4.
-<sphere-distortion.png, id=62, 478.588pt x 250.536pt>
+<sphere-distortion.png, id=62, 319.594pt x 195.932pt>
 File: sphere-distortion.png Graphic file (type png)
 
 <use sphere-distortion.png>
 Package pdftex.def Info: sphere-distortion.png used on input line 133.
-(pdftex.def)             Requested size: 207.0021pt x 108.36296pt.
+(pdftex.def)             Requested size: 207.0021pt x 126.90883pt.
 
 <sphere-perspective-zoom.png, id=63, 754.017pt x 432.817pt>
 File: sphere-perspective-zoom.png Graphic file (type png)
@@ -252,26 +252,83 @@ Chapter 5.
 <center-error.png, id=76, 1482.53876pt x 837.1275pt>
 File: center-error.png Graphic file (type png)
  <use center-error.png>
-Package pdftex.def Info: center-error.png used on input line 164.
+Package pdftex.def Info: center-error.png used on input line 163.
 (pdftex.def)             Requested size: 276.00105pt x 155.83694pt.
 
-<1b-genuine.png, id=77, 1051.67906pt x 588.69937pt>
+[15
+
+ <C:/Users/Laura/Documents/Courses/Thesis/git/paper/center-error.png>]
+<1b-genuine.png, id=80, 1051.67906pt x 588.69937pt>
 File: 1b-genuine.png Graphic file (type png)
  <use 1b-genuine.png>
 Package pdftex.def Info: 1b-genuine.png used on input line 182.
 (pdftex.def)             Requested size: 207.0021pt x 115.86935pt.
 
-[15
+<lo-res-detail.png, id=81, 126.4725pt x 117.43875pt>
+File: lo-res-detail.png Graphic file (type png)
+ <use lo-res-detail.png>
+Package pdftex.def Info: lo-res-detail.png used on input line 190.
+(pdftex.def)             Requested size: 137.9979pt x 128.14366pt.
 
-] [16 <C:/Users/Laura/Documents/Courses/Thesis/git/paper/center-error.png> <C:/
-Users/Laura/Documents/Courses/Thesis/git/paper/1b-genuine.png>]
+<hi-res-detail.png, id=82, 170.88844pt x 152.06813pt>
+File: hi-res-detail.png Graphic file (type png)
+ <use hi-res-detail.png>
+Package pdftex.def Info: hi-res-detail.png used on input line 195.
+(pdftex.def)             Requested size: 137.9979pt x 122.80788pt.
+
+[16 <C:/Users/Laura/Documents/Courses/Thesis/git/paper/1b-genuine.png>]
+File: 1b-genuine.png Graphic file (type png)
+
+<use 1b-genuine.png>
+Package pdftex.def Info: 1b-genuine.png used on input line 218.
+(pdftex.def)             Requested size: 172.5pt x 96.55629pt.
+ <1b-lateral.png, id=87, 530.73282pt x 471.26062pt>
+File: 1b-lateral.png Graphic file (type png)
+
+<use 1b-lateral.png>
+Package pdftex.def Info: 1b-lateral.png used on input line 224.
+(pdftex.def)             Requested size: 155.24895pt x 137.84857pt.
+
+<1b-lateral-reflection.png, id=88, 553.31718pt x 496.85625pt>
+File: 1b-lateral-reflection.png Graphic file (type png)
+
+<use 1b-lateral-reflection.png>
+Package pdftex.def Info: 1b-lateral-reflection.png used on input line 230.
+(pdftex.def)             Requested size: 155.24895pt x 139.40689pt.
+
+<1b-away.png, id=89, 730.98094pt x 533.74406pt>
+File: 1b-away.png Graphic file (type png)
+ <use 1b-away.png>
+Package pdftex.def Info: 1b-away.png used on input line 236.
+(pdftex.def)             Requested size: 155.24895pt x 113.36006pt.
+
+<1b-away2.png, id=90, 886.81313pt x 494.59781pt>
+File: 1b-away2.png Graphic file (type png)
+ <use 1b-away2.png>
+Package pdftex.def Info: 1b-away2.png used on input line 242.
+(pdftex.def)             Requested size: 155.24895pt x 86.58609pt.
+
+<1b-composite.png, id=91, 655.69969pt x 476.53032pt>
+File: 1b-composite.png Graphic file (type png)
+ <use 1b-composite.png>
+Package pdftex.def Info: 1b-composite.png used on input line 249.
+(pdftex.def)             Requested size: 172.5pt x 125.36375pt.
+
+
+LaTeX Warning: Float too large for page by 74.237pt on input line 255.
+
+[17 <C:/Users/Laura/Documents/Courses/Thesis/git/paper/lo-res-detail.png> <C:/U
+sers/Laura/Documents/Courses/Thesis/git/paper/hi-res-detail.png>] [18 <C:/Users
+/Laura/Documents/Courses/Thesis/git/paper/1b-lateral.png> <C:/Users/Laura/Docum
+ents/Courses/Thesis/git/paper/1b-lateral-reflection.png> <C:/Users/Laura/Docume
+nts/Courses/Thesis/git/paper/1b-away.png> <C:/Users/Laura/Documents/Courses/The
+sis/git/paper/1b-away2.png> <C:/Users/Laura/Documents/Courses/Thesis/git/paper/
+1b-composite.png>] [19]
 Chapter 6.
-[17
+[20
 
-] [18
+] (C:\Users\Laura\Documents\Courses\Thesis\git\paper\main.bbl) [21
 
-
-] (C:\Users\Laura\Documents\Courses\Thesis\git\paper\main.bbl) [19
 
 ]
 (C:\Users\Laura\Documents\Courses\Thesis\git\paper\main.aux
@@ -279,13 +336,13 @@ Chapter 6.
 (C:\Users\Laura\Documents\Courses\Thesis\git\paper\contents.aux)
 (C:\Users\Laura\Documents\Courses\Thesis\git\paper\intro.aux)) ) 
 Here is how much of TeX's memory you used:
- 2554 strings out of 493921
- 40657 string characters out of 3147282
+ 2600 strings out of 493921
+ 41603 string characters out of 3147282
  97734 words of memory out of 3000000
- 5837 multiletter control sequences out of 15000+200000
- 7717 words of font info for 27 fonts, out of 3000000 for 9000
+ 5876 multiletter control sequences out of 15000+200000
+ 7419 words of font info for 26 fonts, out of 3000000 for 9000
  841 hyphenation exceptions out of 8191
- 36i,7n,38p,1152b,451s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 36i,13n,38p,1152b,550s stack positions out of 5000i,500n,10000p,200000b,50000s
 <C:/Program Fil
 es/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmbx9.pfb><C:/Program Files/MiKTeX
  2.9/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Program Files/MiKTeX 2.9/fon
@@ -297,9 +354,9 @@ sfonts/cm/cmr12.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm
 am Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsl10.pfb><C:/Program Files
 /MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsl12.pfb><C:/Program Files/MiKTeX 
 2.9/fonts/type1/public/amsfonts/cm/cmti10.pfb>
-Output written on main.pdf (19 pages, 3749950 bytes).
+Output written on main.pdf (21 pages, 4033346 bytes).
 PDF statistics:
- 131 PDF objects out of 1000 (max. 8388607)
+ 150 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
- 61 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 96 words of extra memory for PDF output out of 10000 (max. 10000000)
 

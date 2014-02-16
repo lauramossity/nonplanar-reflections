@@ -131,7 +131,7 @@ Because accuracy in finding the sphere center is key to this analysis, the appli
 \begin{figure}
 	\centering
     	\includegraphics[width=0.6\textwidth]{sphere-distortion}
-	\caption{If the image plane is not facing the sphere head-on, the distance from the point $P_1$ to its projection $p_1$ through the center of projection $C$ is shorter than the distance from $P_2$ to $p_2$, so one side is distorted. Additonally, the projection $q$ of the sphere center $Q$ is not the midpoint of $p_1$ and $p_2$.}
+	\caption{If the image plane is not facing the sphere head-on, the distance from the point $P_2$ to its projection $p_2$ through the center of projection $C$ is shorter than the distance from $P_1$ to $p_1$, so $P_2$ appears closer and thus that side of the sphere appears larger. Additionally, the projection $q$ of the sphere center $Q$ is not the midpoint of $p_1$ and $p_2$.}
 	\label{sphere-distortion}
 \end{figure}
 
@@ -158,7 +158,7 @@ One issue with this naive approach to finding the center is that perspective pro
 
 
 \chapter{Results}
-\begin{figure}
+\begin{figure}[h]
 	\centering
     	\includegraphics[width=0.8\textwidth]{center-error}
 	\caption{The center found when finding the best fit for a perfect circle (green cross) is significantly offset from the actual projected center of the sphere (pink dot).}
@@ -171,36 +171,107 @@ Because there is some error associated with having a human input the points to c
 
 One possible alternative to looking at the minimum distance to the center would be to consider the the point of intersection of all the rays, similar to the vanishing point method in the planar case. However, the spherical case is much more sensitive to error than the planar case. In the planar case the incident rays are parallel, so their vanishing point often lies far outside the image, and so the position of the intersection point is not very sensitive to a difference of a few pixels in the points picked. In the spherical case, however, it is not uncommon for the projections of the incident rays to not intersect cleanly even in genuine images.
 
+The primary test set includes Blender-generated images of a smaller sphere with surrounding objects that are close, moderately far away, and very far away, and likewise for a larger sphere.
+
 % TODO measurable error- residuals?
 
 \section{Typical Results for Genuine Images}
-% typical results for untampered images- how many pixels away from the center, how scattered the intersections can be
-% effects of higher resolution
-% no constant error- same when image flipped
-\begin{figure}
+% TODO add more figures
+\begin{figure}[h]
 	\centering
     	\includegraphics[width=0.6\textwidth]{1b-genuine}
 	\caption{The chair and the cube are reasonably consistent with the center of the sphere, but the incident rays from the letters appear to intersect at a point slightly offset from the center, despite being unmanipulated.}
 	\label{1b-genuine}
 \end{figure}
-Based on images containing relatively large and relatively small reflective spheres with objects at varying distances, the projections of the incident rays usually come within 5 pixels of the sphere center. This increases with higher resolution images. As seen in Figure~\ref{1b-genuine}, some objects seem to have a clean intersection point that is offset from the sphere center. The source of this error is unknown.
+
+\begin{figure}
+	\centering
+	\begin{subfigure}[b]{0.4\textwidth}
+                \includegraphics[width=\textwidth]{lo-res-detail}
+                \caption{960x540, detail}
+    \end{subfigure}
+    ~
+   	\begin{subfigure}[b]{0.4\textwidth}
+                \includegraphics[width=\textwidth]{hi-res-detail}
+                \caption{1920x1080, detail}
+    \end{subfigure}
+    \caption{Increasing the resolution does not significantly improve the distance from the incident rays to the center, which implies that there is some other phenomenon at work.}
+	\label{resolution-comparison}
+\end{figure}
+Overall, in practice for the test set of images, the projections of the incident rays come fairly close to the sphere center, which would seem to support the validity for this consistency test. In most images, the rays all come within 10 pixels of the sphere center. However, the rays have a consistent offset from the center, which indicates that there may be some other phenomenon at work. For example, in Figure~\ref{1b-genuine}, some objects seem to have a clean intersection point that is offset from the sphere center. This location for the intersection is consistent for multiple trials of analyzing the image, so it is clearly not the result of random human error when picking points.
+
+Some images appear to contain more error than others. In the test set, the images with the smaller reflective sphere have the rays clustered more tightly around the sphere center than those with the larger sphere. For an image of a small sphere with objects at medium distance, the rays were often within 2 pixels of the center, but away as much as 4 pixels, For the analogous image with the larger sphere at the same resolution the rays were mostly within 3 pixels but as far away as 7. The effect is slight but fairly consistent.
+
+The resolution of the image also has an effect on the distance to the center from the rays. A test image was rendered in Blender at both an original resolution of 960x540 and 1920x1080, or double the original resolution (Figure~\ref{resolution-comparison}). The increase in resolution resulted in an overall increase in pixel distance, though the pixel distance did not double. The fact that the distance did not double indicates that having more detail does lead to more precision in selecting features, as expected. The fact that it did not decrease, however, indicates that there is some naturally occurring offset in the image that is not the result of human error.
+
+One other consideration that was explored is whether or not point picking introduces some constant error. Flipping the image horizontally or vertically and then analyzing it also flips the direction of the offset, so this is clearly not the case.
 
 
 
 \section{Effects of Forgery}
-
 % address: edited images- shifts forward/back, side to side, farther back, composite,
 % why the radius test breaks for certain adjustments
 
+\begin{figure}
+	\centering
+	\begin{subfigure}[b]{0.5\textwidth}
+                \includegraphics[width=\textwidth]{1b-genuine}
+                \caption{Original}
+    \end{subfigure}
+    
+    \begin{tabular}{c c}
+	    \begin{subfigure}{0.45\textwidth}
+	                \includegraphics[width=\textwidth]{1b-lateral}
+	                \caption{Movement about the sphere\\}
+	                \label{subfig:1b-lateral}
+	    \end{subfigure}
+	    &
+	    \begin{subfigure}{0.45\textwidth}
+	                \includegraphics[width=\textwidth]{1b-lateral-reflection}
+	                \caption{Movement about the sphere, with reflection also moved}
+	                \label{subfig:1b-lateral-reflection}
+	    \end{subfigure}
+	    \\ \\
+	    \begin{subfigure}[b]{0.45\textwidth}
+	                \includegraphics[width=\textwidth]{1b-away}
+	                \caption{Movement away from the sphere\\}
+	                \label{subfig:1b-away}
+	    \end{subfigure}
+	    &
+	    \begin{subfigure}[b]{0.45\textwidth}
+	                \includegraphics[width=\textwidth]{1b-away2}
+	                \caption{Movement farther away from the sphere}
+	                \label{subfig:1b-away2}
+	    \end{subfigure}
+    \end{tabular}
+    
+    \begin{subfigure}{0.5\textwidth}
+                \includegraphics[width=\textwidth]{1b-composite}
+                \caption{The reflection is replaced with a reflection from another image (with a smaller sphere)}
+                \label{subfig:1b-composite}
+    \end{subfigure}
+    \caption{A comparison of different types of forgeries in which the green cube is manipulated.}
+	\label{forgery-comparison}
+\end{figure}
+
+The distance-to-center test works well only in certain cases. In most cases, however, it is not sensitive enough to certain types of manipulations, which is worsened by the fact that most of the time the rays don't even intersect the sphere center for the test set.
+
+The test is most sensitive to motion about the sphere. In Figure~\ref{subfig:1b-lateral}, the green cube is moved a distance approximately equal to its own width towards the letters. This results in a very noticeable inconsistency, as the rays lie nowhere near the sphere center. Without the rays, the image may be convincing at first glance, but on further inspection one could easily tell that the green sphere is a bit too close to the letters compared with their reflections. If the green cube's reflection is moved towards the letters' reflection as well (Figure~\ref{subfig:1b-lateral-reflection}), the rays' offset from the center is less obvious and could even be confused for the natural error that occurs in the original test images, without having the context of the original image.
+
+Movement towards and away from the sphere is a clear weakness of the test. In Figure~\ref{subfig:1b-away}, where the green cube is moved away from the sphere by about its own width, the difference is barely noticeable aside from the rays' intersection moving to the other side of the center point. The effect is amplified if the cube is moved even farther back (Figure~\ref{subfig:1b-away2}) but if only the distances to the center are considered, this modified image is still reasonably convincing.
+
+The most realistic scenario is one in which an object and its reflection are pasted into an image, as shifting around an object that is already there probably doesn't have many real-world applications. Figure~\ref{subfig:1b-composite} shows an image where the green cube's reflection is pasted in from a different image, in which the cube was reflected onto another sphere. Again, testing this image does not yield significant enough results to conclusively state whether or not it was manipulated, although the intersection point is not very well-defined.
 
 \chapter{Future Work}
-% what causes errors- blender's fault?
+The primary flaw in the test for rays going through the center is that there is clearly some offset in the rays, at least for the test set generated by Blender. It is possible that Blender generates the reflections inaccurately, but since the test images were generated using ray tracing (as Blender 2.37+ defaults), it is not clear how or why that would happen. In order to evaluate the validity of the test, more investigation is required into whether or not Blender truly generates images with reflections accurately, and real-life photos with spherical mirrors should be staged as well.
+
 % different quadrics
+% real world examples probably require enhancement to be able to distinguish features well enough
 
 
 \clearpage
 
-\appendix
+%\appendix
 %\include{appa}
 %\clearpage
 
