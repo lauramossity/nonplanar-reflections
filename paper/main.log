@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.4-1.40.13 (MiKTeX 2.9 64-bit) (preloaded format=pdflatex 2013.12.2)  16 FEB 2014 19:06
+This is pdfTeX, Version 3.1415926-2.4-1.40.13 (MiKTeX 2.9 64-bit) (preloaded format=pdflatex 2013.12.2)  19 FEB 2014 23:57
 entering extended mode
 **main.tex
 (C:\Users\Laura\Documents\Courses\Thesis\git\paper\main.tex
@@ -154,53 +154,66 @@ Chapter 1.
 
 ]
 Chapter 2.
-<planar-vanishing-point-forged.png, id=19, 508.14844pt x 375.65344pt>
+<moon-landing-consistent.png, id=19, 455.45157pt x 487.8225pt>
+File: moon-landing-consistent.png Graphic file (type png)
+
+<use moon-landing-consistent.png>
+Package pdftex.def Info: moon-landing-consistent.png used on input line 29.
+(pdftex.def)             Requested size: 276.00105pt x 295.62108pt.
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+<planar-vanishing-point-forged.png, id=20, 508.14844pt x 375.65344pt>
 File: planar-vanishing-point-forged.png Graphic file (type png)
 
 <use planar-vanishing-point-forged.png>
-Package pdftex.def Info: planar-vanishing-point-forged.png used on input line 2
-8.
+Package pdftex.def Info: planar-vanishing-point-forged.png used on input line 4
+0.
 (pdftex.def)             Requested size: 276.00105pt x 204.04208pt.
 
-<planar-midpoint-genuine.png, id=21, 950.04938pt x 447.17062pt>
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+<planar-midpoint-genuine.png, id=22, 950.04938pt x 447.17062pt>
 File: planar-midpoint-genuine.png Graphic file (type png)
 
 <use planar-midpoint-genuine.png>
-Package pdftex.def Info: planar-midpoint-genuine.png used on input line 35.
+Package pdftex.def Info: planar-midpoint-genuine.png used on input line 47.
 (pdftex.def)             Requested size: 276.00105pt x 129.90814pt.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <9> on input line 36.
+(Font)              <9> on input line 48.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <6> on input line 36.
+(Font)              <6> on input line 48.
 
-<center-of-projection-planar-genuine.png, id=22, 1213.53375pt x 561.59813pt>
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+<center-of-projection-planar-genuine.png, id=23, 1213.53375pt x 561.59813pt>
 File: center-of-projection-planar-genuine.png Graphic file (type png)
 
 <use center-of-projection-planar-genuine.png>
 Package pdftex.def Info: center-of-projection-planar-genuine.png used on input 
-line 42.
+line 54.
 (pdftex.def)             Requested size: 276.00105pt x 127.7252pt.
- [5
 
 
-] [6 <C:/Users/Laura/Documents/Courses/Thesis/git/paper/planar-vanishing-point-
-forged.png> <C:/Users/Laura/Documents/Courses/Thesis/git/paper/planar-midpoint-
-genuine.png>]
-<moon-landing-consistent.png, id=35, 455.45157pt x 487.8225pt>
-File: moon-landing-consistent.png Graphic file (type png)
+LaTeX Warning: `h' float specifier changed to `ht'.
 
-<use moon-landing-consistent.png>
-Package pdftex.def Info: moon-landing-consistent.png used on input line 59.
-(pdftex.def)             Requested size: 276.00105pt x 295.62108pt.
- [7 <C:/Users/Laura/Documents/Courses/Thesis/git/paper/center-of-projection-pla
-nar-genuine.png>] [8 <C:/Users/Laura/Documents/Courses/Thesis/git/paper/moon-la
-nding-consistent.png>]
+[5
+
+
+] [6 <C:/Users/Laura/Documents/Courses/Thesis/git/paper/moon-landing-consistent
+.png>] [7 <C:/Users/Laura/Documents/Courses/Thesis/git/paper/planar-vanishing-p
+oint-forged.png> <C:/Users/Laura/Documents/Courses/Thesis/git/paper/planar-midp
+oint-genuine.png>] [8 <C:/Users/Laura/Documents/Courses/Thesis/git/paper/center
+-of-projection-planar-genuine.png>]
 Chapter 3.
 <normal-reflection.png, id=44, 540.51938pt x 438.13687pt>
 File: normal-reflection.png Graphic file (type png)
 
 <use normal-reflection.png>
-Package pdftex.def Info: normal-reflection.png used on input line 81.
+Package pdftex.def Info: normal-reflection.png used on input line 83.
 (pdftex.def)             Requested size: 207.0021pt x 167.79071pt.
  [9
 
@@ -208,14 +221,14 @@ Package pdftex.def Info: normal-reflection.png used on input line 81.
 <colinear-radius.png, id=48, 268.202pt x 220.825pt>
 File: colinear-radius.png Graphic file (type png)
  <use colinear-radius.png>
-Package pdftex.def Info: colinear-radius.png used on input line 94.
+Package pdftex.def Info: colinear-radius.png used on input line 96.
 (pdftex.def)             Requested size: 207.0021pt x 170.44347pt.
 
 <colinear-radius-camera-view.png, id=49, 254.551pt x 196.735pt>
 File: colinear-radius-camera-view.png Graphic file (type png)
 
 <use colinear-radius-camera-view.png>
-Package pdftex.def Info: colinear-radius-camera-view.png used on input line 101
+Package pdftex.def Info: colinear-radius-camera-view.png used on input line 103
 .
 (pdftex.def)             Requested size: 207.0021pt x 159.98787pt.
  [10 <C:/Users/Laura/Documents/Courses/Thesis/git/paper/normal-reflection.png>]
@@ -227,20 +240,20 @@ Chapter 4.
 File: sphere-distortion.png Graphic file (type png)
 
 <use sphere-distortion.png>
-Package pdftex.def Info: sphere-distortion.png used on input line 133.
+Package pdftex.def Info: sphere-distortion.png used on input line 141.
 (pdftex.def)             Requested size: 207.0021pt x 126.90883pt.
 
 <sphere-perspective-zoom.png, id=63, 754.017pt x 432.817pt>
 File: sphere-perspective-zoom.png Graphic file (type png)
 
 <use sphere-perspective-zoom.png>
-Package pdftex.def Info: sphere-perspective-zoom.png used on input line 141.
+Package pdftex.def Info: sphere-perspective-zoom.png used on input line 149.
 (pdftex.def)             Requested size: 137.9979pt x 79.21133pt.
 
 <sphere-ortho.png, id=64, 705.38531pt x 404.26031pt>
 File: sphere-ortho.png Graphic file (type png)
  <use sphere-ortho.png>
-Package pdftex.def Info: sphere-ortho.png used on input line 146.
+Package pdftex.def Info: sphere-ortho.png used on input line 154.
 (pdftex.def)             Requested size: 137.9979pt x 79.08643pt.
 
 [13
@@ -252,7 +265,7 @@ Chapter 5.
 <center-error.png, id=76, 1482.53876pt x 837.1275pt>
 File: center-error.png Graphic file (type png)
  <use center-error.png>
-Package pdftex.def Info: center-error.png used on input line 163.
+Package pdftex.def Info: center-error.png used on input line 171.
 (pdftex.def)             Requested size: 276.00105pt x 155.83694pt.
 
 [15
@@ -261,51 +274,51 @@ Package pdftex.def Info: center-error.png used on input line 163.
 <1b-genuine.png, id=80, 1051.67906pt x 588.69937pt>
 File: 1b-genuine.png Graphic file (type png)
  <use 1b-genuine.png>
-Package pdftex.def Info: 1b-genuine.png used on input line 182.
+Package pdftex.def Info: 1b-genuine.png used on input line 189.
 (pdftex.def)             Requested size: 207.0021pt x 115.86935pt.
 
 <lo-res-detail.png, id=81, 126.4725pt x 117.43875pt>
 File: lo-res-detail.png Graphic file (type png)
  <use lo-res-detail.png>
-Package pdftex.def Info: lo-res-detail.png used on input line 190.
+Package pdftex.def Info: lo-res-detail.png used on input line 197.
 (pdftex.def)             Requested size: 137.9979pt x 128.14366pt.
 
 <hi-res-detail.png, id=82, 170.88844pt x 152.06813pt>
 File: hi-res-detail.png Graphic file (type png)
  <use hi-res-detail.png>
-Package pdftex.def Info: hi-res-detail.png used on input line 195.
+Package pdftex.def Info: hi-res-detail.png used on input line 202.
 (pdftex.def)             Requested size: 137.9979pt x 122.80788pt.
 
 [16 <C:/Users/Laura/Documents/Courses/Thesis/git/paper/1b-genuine.png>]
 <1b-lateral.png, id=87, 530.73282pt x 471.26062pt>
 File: 1b-lateral.png Graphic file (type png)
  <use 1b-lateral.png>
-Package pdftex.def Info: 1b-lateral.png used on input line 219.
+Package pdftex.def Info: 1b-lateral.png used on input line 223.
 (pdftex.def)             Requested size: 155.24895pt x 137.84857pt.
 
 <1b-lateral-reflection.png, id=88, 553.31718pt x 496.85625pt>
 File: 1b-lateral-reflection.png Graphic file (type png)
 
 <use 1b-lateral-reflection.png>
-Package pdftex.def Info: 1b-lateral-reflection.png used on input line 225.
+Package pdftex.def Info: 1b-lateral-reflection.png used on input line 229.
 (pdftex.def)             Requested size: 155.24895pt x 139.40689pt.
 
 <1b-away.png, id=89, 730.98094pt x 533.74406pt>
 File: 1b-away.png Graphic file (type png)
  <use 1b-away.png>
-Package pdftex.def Info: 1b-away.png used on input line 231.
+Package pdftex.def Info: 1b-away.png used on input line 235.
 (pdftex.def)             Requested size: 155.24895pt x 113.36006pt.
 
 <1b-away2.png, id=90, 886.81313pt x 494.59781pt>
 File: 1b-away2.png Graphic file (type png)
  <use 1b-away2.png>
-Package pdftex.def Info: 1b-away2.png used on input line 237.
+Package pdftex.def Info: 1b-away2.png used on input line 241.
 (pdftex.def)             Requested size: 155.24895pt x 86.58609pt.
 
 <1b-composite.png, id=91, 655.69969pt x 476.53032pt>
 File: 1b-composite.png Graphic file (type png)
  <use 1b-composite.png>
-Package pdftex.def Info: 1b-composite.png used on input line 244.
+Package pdftex.def Info: 1b-composite.png used on input line 248.
 (pdftex.def)             Requested size: 172.5pt x 125.36375pt.
 
 [17 <C:/Users/Laura/Documents/Courses/Thesis/git/paper/lo-res-detail.png> <C:/U
@@ -327,10 +340,10 @@ Chapter 6.
 (C:\Users\Laura\Documents\Courses\Thesis\git\paper\contents.aux)
 (C:\Users\Laura\Documents\Courses\Thesis\git\paper\intro.aux)) ) 
 Here is how much of TeX's memory you used:
- 2600 strings out of 493921
- 41603 string characters out of 3147282
- 97734 words of memory out of 3000000
- 5876 multiletter control sequences out of 15000+200000
+ 2601 strings out of 493921
+ 41624 string characters out of 3147282
+ 98734 words of memory out of 3000000
+ 5877 multiletter control sequences out of 15000+200000
  7419 words of font info for 26 fonts, out of 3000000 for 9000
  841 hyphenation exceptions out of 8191
  36i,13n,38p,1152b,550s stack positions out of 5000i,500n,10000p,200000b,50000s
@@ -345,7 +358,7 @@ sfonts/cm/cmr12.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm
 am Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsl10.pfb><C:/Program Files
 /MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsl12.pfb><C:/Program Files/MiKTeX 
 2.9/fonts/type1/public/amsfonts/cm/cmti10.pfb>
-Output written on main.pdf (21 pages, 4033757 bytes).
+Output written on main.pdf (21 pages, 4037316 bytes).
 PDF statistics:
  150 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
