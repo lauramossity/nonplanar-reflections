@@ -70,7 +70,7 @@ If a forger wanted to manipulate an image that contains a reflective surface, th
 
 \chapter{Mathematical Techniques}
 \section{Approach}
-The goal of this analysis is to find a method for determining reflection consistency that is general enough to not need to know the camera parameters, in the same vein as the existing techniques for planar mirrors. To simplify the geometry of this analysis, we will restrict the form of our non-planar mirrors to be spherical. Quadric surfaces in general are likely to be good enough for typical use cases because most general curves encountered in the real world can be approximated as either a quadric surface or a set of quadric surfaces.
+The goal of this analysis is to find a method for determining reflection consistency that is general enough to not require knowledge of the camera parameters, in the same vein as the existing techniques for planar mirrors. To simplify the geometry of this analysis, we will restrict the form of our non-planar mirrors to be spherical. Quadric surfaces in general are likely to be good enough for typical use cases because most general curves encountered in the real world can be approximated as either a quadric surface or a set of quadric surfaces.
 
 We also assume the camera used to take any of the images analyzed is a point camera with perspective projection. This is a reasonable assumption considering both the size of most digital camera sensors, and the fact that the camera would have to be far enough away from the subjects of the photograph to capture everything required to perform the analysis.
 
@@ -83,7 +83,7 @@ Reflection of light on a surface is directly related to the surface normal at th
 \begin{figure}
 	\centering
     	\includegraphics[width=0.6\textwidth]{normal-reflection}
-	\caption{Given a camera location $C$, a point $P$ on an object and its corresponding reflection $R$, the ray $PR$ appears equivalent to the ray $PB$ from the point of view of the camera. The ray $PR$ is also perpendicular to the surface normal $N$. Since all of the points in this diagram must be coplanar, this holds true in 3D space. \cite[Fig.~2]{obrien12}}
+	\caption{Given a camera location $C$, a point $P$ on an object and its corresponding reflection $R$, the ray $PR$ appears equivalent to the ray $PB$ from the point of view of the camera. The ray $PR$ is also parallel to the surface normal $\hat{N}$. Since all of the points in this diagram must be coplanar, this holds true in 3D space. \cite[Fig.~2]{obrien12}}
 	\label{normal-reflection}
 \end{figure}
 
@@ -96,7 +96,7 @@ In the case of a planar mirror, all of these rays would be parallel in three-dim
 \begin{figure}
 	\centering
     	\includegraphics[width=0.6\textwidth]{colinear-radius}
-	\caption{Since the point $P$, the reflection point $B$, the camera $C$, and the normal $N$ are all coplanar, and $N$ is an extension of the radius of a sphere, then $PB$ and any radius on this cross-section of the sphere must be coplanar.}
+	\caption{Since the point $P$, the reflection point $B$, the camera $C$, and the normal $\hat{N}$ are all coplanar, and $\hat{N}$ is an extension of the radius of a sphere, then $PB$ and any radius on this cross-section of the sphere must be coplanar.}
 	\label{colinear-radius}
 \end{figure}
 
@@ -273,11 +273,10 @@ If applied to real-world examples, one problem that may arise is the lack of det
 
 It is easy to envision that a forger could beat these techniques by performing the same tests and adjusting as needed. If they were to splice in an object and its reflection, they could align and scale them such that the projections of the incident rays go through the center of the sphere. This is limited mostly by the fact that in a real world scenario, the forger would be restricted by how the reflective surface in the source image is set up. Nonetheless, more research into counterforensics is recommended.
 
-Finally, in order to be able to analyze most curved surfaces, methods will need to be developed to analyze reflections on other quadric surfaces, such as cylinders and cones. In these cases it would probably be necessary to develop a reliable method for estimating the normal, as these shapes are not regular as viewed from any angle like a sphere.
+Finally, in order to be able to analyze most curved surfaces, methods will need to be developed to analyze reflections on other quadric surfaces, such as cylinders and cones. In these cases it would probably be necessary to develop a reliable method for estimating the normal, as these shapes are not regular as viewed from any angle as is a sphere.
 
 
 \clearpage
 
 \bibliography{Master}
 \end{document}
-

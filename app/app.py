@@ -217,10 +217,10 @@ class MainWindow(QtGui.QMainWindow):
         toolBar = self.addToolBar("Toolbar")
         toolBar.setMovable(False)
 
-        for action in self.modeActGrp.actions():
-            toolBar.addAction(action)
+        #for action in self.modeActGrp.actions():
+         #   toolBar.addAction(action)
 
-        toolBar.addSeparator()
+        #toolBar.addSeparator()
 
         for action in self.mouseToolActGrp.actions():
             toolBar.addAction(action)
