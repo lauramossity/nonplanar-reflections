@@ -179,7 +179,7 @@ As detailed in Section~\ref{sec:perspective-distortion}, it as not as simple as 
 
 Because there is some error associated with having a human input the points to create the projections of the incident rays, it is assumed that in an unaltered image the rays will probably not cross the exact center of the sphere. For this reason, the measure for authenticity will be how close the rays come to the center of the sphere.
 
-One possible alternative to looking at the minimum distance to the center would be to consider the the point of intersection of all the rays, similar to the vanishing point method in the planar case. However, the spherical case is much more sensitive to error than the planar case. In the planar case the incident rays are parallel, so their vanishing point often lies far outside the image, and so the position of the intersection point is not very sensitive to a difference of a few pixels in the points picked. In the spherical case, however, it is not uncommon for the projections of the incident rays to not intersect cleanly even in genuine images.
+One possible alternative to looking at the minimum distance to the center would be to consider the the point of intersection of all the rays, similar to the vanishing point method in the planar case. However, the spherical case is much more sensitive to error than the planar case. In the planar case the incident rays are parallel, so the angle between their projections tends to be very small, and so the position of the intersection point is not very sensitive to a difference of a few pixels in the points picked. In the spherical case, however, it is not uncommon for the projections of the incident rays to not intersect cleanly even in genuine images.
 
 The primary test set includes Blender-generated images of a smaller sphere with surrounding objects that are close, moderately far away, and very far away, and likewise for a larger sphere.
 
@@ -263,7 +263,7 @@ Movement towards and away from the sphere is a clear weakness of the test. In Fi
 
 The most realistic scenario is one in which an object and its reflection are pasted into an image, as shifting around an object that is already there probably doesn't have many real-world applications. Figure~\ref{subfig:1b-composite} shows an image where the green cube's reflection is pasted in from a different image, in which the cube was reflected onto another sphere. Again, testing this image does not yield significant enough results to conclusively state whether or not it was manipulated, although the intersection point is not very well-defined.
 
-One strength of both this test and almost any consistency test is that it should not produce any false positives in theory, as long as the tolerance for genuine images is calibrated correctly. It may miss some false negatives, in the case of an object moving towards or away from the sphere, but any drastic offset from the center is clearly a forgery.
+One strength of both this test and almost any consistency test is that it should not produce any false positives in theory, as long as the tolerance for genuine images is calibrated correctly. It may produce some false negatives, in the case of an object moving towards or away from the sphere, but any drastic offset from the center is clearly a forgery.
 
 \chapter{Future Work}
 % counterforensics
@@ -271,7 +271,7 @@ The primary flaw in the test for rays going through the center is that there is 
 
 If applied to real-world examples, one problem that may arise is the lack of detail in the reflection, because it is likely that a spherical mirror occurring in the real world would be relatively small, and so the features of the reflection would be hard to distinguish. More research will likely be needed to determine how much detail is needed and how to enhance the reflections if necessary.
 
-It is easy to envision that a forger could beat these techniques by performing the same tests and adjusting as needed. If they were to splice in an object and its reflection, they could align and scale them such that the projections of the incident rays go through the center of the sphere. This is limited mostly by the fact that in a real world scenario, the forger would be restricted by how the reflective surface in the source image is set up. Nonetheless, more research into counterforensics is recommended.
+It is easy to envision that forgers could beat these techniques by performing the same tests and adjusting as needed. If they were to splice in an object and its reflection, they could align and scale them such that the projections of the incident rays go through the center of the sphere. This is limited mostly by the fact that in a real world scenario, the forger would be restricted by how the reflective surface in the source image is set up. Nonetheless, more research into counterforensics is recommended.
 
 Finally, in order to be able to analyze most curved surfaces, methods will need to be developed to analyze reflections on other quadric surfaces, such as cylinders and cones. In these cases it would probably be necessary to develop a reliable method for estimating the normal, as these shapes are not regular as viewed from any angle as is a sphere.
 
